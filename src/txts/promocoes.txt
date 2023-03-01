@@ -1,0 +1,6 @@
+[
+    {"titulo":"PLACA DE VÍDEO RTX 4090 24GB","imagem":"public/imgs/produtos/1.png","preço":"R$13.447,17"},
+    {"titulo":"MEMÓRIA RAM FURY BEAST DDR4 8GB","imagem":"public/imgs/produtos/9.png","preço":"R$279,00"},
+    {"titulo":"FONTE DE ALIMENTAÇÃO CORSAIR 500W","imagem":"public/imgs/produtos/8.png","preço":"R$418,50"},
+    {"titulo":"SSD KINGSTON 480GB 2.5 SATA 3 480GB","imagem":"public/imgs/produtos/7.png","preço":"R$292,50"}
+]
