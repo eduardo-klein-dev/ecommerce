@@ -21,7 +21,7 @@ body {
 
 header {
     background-color: #141414;
-    height: 150px;
+    height: 100px;
     width: 100vw;
 }
 
@@ -33,19 +33,21 @@ header {
     padding: 10px;
 }
 
-.imagem-logo {
+.header-logo {
     width: 150px;
+    margin-top: 0px;
 }
 
 .imagem-logo img {
     width: 100%;
+    margin-top: 20px;
 }
 
 .header-menu {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    margin-top: -50px;
 }
 
 .header-menu-buttons {
@@ -58,16 +60,24 @@ header {
     flex-direction: row;
 }
 
+.btn-header {
+    background-color: #141414; 
+    color: #FFF; 
+    border:none;
+    padding: 10px 10px 10px 10px;
+    font-size: 17px;
+    border-radius: 10px;
+}
+
 .header-menu ul button {
     margin: 5px;
     width: 120px;
 }
 
-.header-menu ul button:hover,
-.header-menu ul .active {
-    border: 1px solid #FFF;
-    color: #FFF;
-    background-color: #141414;
+.btn-header:hover,
+.btn-header.active {
+    color: #141414;
+    background-color: #FFF;
 }
 
 .header-menu-search {
@@ -99,14 +109,14 @@ header {
 .promotions {
     background-image: url("../../public/imgs/background-gray.jpg");
     width: 100vw;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 100px);
 }
 
 .promotions-opacity {
     background-color: rgba(255, 255, 2555, 0.6);
     width: inherit;
     height: inherit;
-}
+} 
 
 .promotions-body {
     text-transform: uppercase;
@@ -114,9 +124,13 @@ header {
     padding-bottom: 30px;
 }
 
-.promotion {
+.tittle-promotions {
     margin-top: 30px;
+}
+
+.slide {
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
 }
 
@@ -125,14 +139,13 @@ header {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-left: 10px;
-    margin-right: 10px;
+    justify-content: center;
     background-color: #141414;
     color: #FFF;
     border-radius: 10px;
 } 
 
-.item-promotion-imagem img{
+.item-promotion-imagem img {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }

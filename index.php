@@ -39,16 +39,16 @@
                 <div class="header-menu-buttons">
                     <ul>
                         <li>
-                            <button type="button" class="active btn btn-light">Início</button>
+                            <button type="button" class="btn-header active">Início</button>
                         </li>
                         <li>
-                            <button type="button" class="btn btn-light">Produtos</button>
+                            <button type="button" class="btn-header">Produtos</button>
                         </li>
                         <li>
-                            <button type="button" class="btn btn-light">Quem somos</button>
+                            <button type="button" class="btn-header">Quem somos</button>
                         </li>
                         <li>
-                            <button type="button" class="btn btn-light">Contatos</button>
+                            <button type="button" class="btn-header">Contatos</button>
                         </li>
                     </ul>
                 </div>
@@ -60,15 +60,16 @@
         <div class="promotions">
             <div class="promotions-opacity">
                 <div class="container promotions-body">
-                    <div class="tittle">
+                    <div class="tittle-promotions">
                         <h2>Promoções:</h2>
                     </div>
                     <div class="line-tittle"></div>
-                    <div class="promotion">
-                        <div class="col-md-12"></div>
+                    <div id="carouselExampleInterval" class="carousel carousel-dark slide" data-bs-ride="carousel" style="margin-top:30px">
+                        <div class="carousel-inner"></div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 

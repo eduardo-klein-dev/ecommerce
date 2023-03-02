@@ -2,5 +2,9 @@
     {"titulo":"PLACA DE VÍDEO RTX 4090 24GB","imagem":"public/imgs/produtos/1.png","preço":"R$13.447,17"},
     {"titulo":"MEMÓRIA RAM FURY BEAST DDR4 8GB","imagem":"public/imgs/produtos/9.png","preço":"R$279,00"},
     {"titulo":"FONTE DE ALIMENTAÇÃO CORSAIR 500W","imagem":"public/imgs/produtos/8.png","preço":"R$418,50"},
-    {"titulo":"SSD KINGSTON 480GB 2.5 SATA 3 480GB","imagem":"public/imgs/produtos/7.png","preço":"R$292,50"}
+    {"titulo":"SSD KINGSTON 480GB 2.5 SATA 3 480GB","imagem":"public/imgs/produtos/7.png","preço":"R$292,50"},
+    {"titulo":"PLACA DE VÍDEO GTX 1650 4GB 128BITS","imagem":"public/imgs/produtos/6.png","preço":"R$1.351,98"},
+    {"titulo":"MEMÓRIA RAM CORSAIR DDR4 32GB","imagem":"public/imgs/produtos/10.png","preço":"R$1.397,17"},
+    {"titulo":"SSD KINGSTON 240GB 2.5 SATA 3 240GB","imagem":"public/imgs/produtos/11.png","preço":"R$202,50"},
+    {"titulo":"PLACA DE VÍDEO GTX 1660 6GB G5 192B","imagem":"public/imgs/produtos/2.png","preço":"1.956,20"}
 ]

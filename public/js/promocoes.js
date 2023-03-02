@@ -1,21 +1,45 @@
 "use strict";
-$(function(){
+$(function () {
 
 	$.ajax({
-		url:'src/txts/promocoes.txt',
-		type:'GET',
-		dataType:'json',
-		beforeSend:function(){
-			$('.promotion').html('<div style="margin-top:20px" class="carregando col-md-12">Carregando...</div>');
+		url: 'src/txts/promocoes.txt',
+		type: 'GET',
+		dataType: 'json',
+		beforeSend: function () {
+			$('.carousel-inner').html('<div style="margin-top:20px" class="carregando col-md-12">Carregando...</div>');
 		},
-		success:function(json) {
+		success: function (json) {
 
 			var html = '';
+			var contador = 0;
+			var primeiro = true;
 
-			for(var i in json) {
-				html += '<div class="promotion"><div class="item-promotion"><div class="item-promotion-imagem"><img src="'+json[i].imagem+'" /></div><div class="item-promotion-tittle">'+json[i].titulo+'</div><div class="item-promotion-preco">'+json[i].preço+'</div></div></div>';
+			for (var i in json) {
+
+				contador = contador + 1;
+				var calculo = contador % 5;
+
+				if (primeiro) {
+					html += '<div class="carousel-item active" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion"><div class="item-promotion-imagem"><img src="' + json[i].imagem + '" /></div><div class="item-promotion-tittle">' + json[i].titulo + '</div><div class="item-promotion-preco">' + json[i].preço + '</div></div>';
+					primeiro = false;
+					console.log('PRIMEIRO: ' + contador);
+				} else {
+
+					if (calculo == 0) {
+						html += '</div></div><div class="carousel-item" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion"><div class="item-promotion-imagem"><img src="' + json[i].imagem + '" /></div><div class="item-promotion-tittle">' + json[i].titulo + '</div><div class="item-promotion-preco">' + json[i].preço + '</div></div>';
+						console.log('SEGUNDO: ' + contador);
+					}
+
+					else {
+						html += '<div class="item-promotion"><div class="item-promotion-imagem"><img src="' + json[i].imagem + '" /></div><div class="item-promotion-tittle">' + json[i].titulo + '</div><div class="item-promotion-preco">' + json[i].preço + '</div></div>';
+						console.log('D: ' + contador);
+					}
+					
+				}
 			}
-			$('.promotion').html(html);
+			html += '</div>';
+			$('.carousel-inner').html(html);
+			console.log(html)
 
 		}
 	});
