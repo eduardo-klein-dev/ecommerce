@@ -39,7 +39,7 @@
                 <div class="header-menu-buttons">
                     <ul>
                         <li>
-                            <button type="button" class="btn-header active">Início</button>
+                            <button id="button-start" type="button" class="btn-header active">Início</button>
                         </li>
                         <li>
                             <button type="button" onblur="productsOnBlur()" id="button-products" class="btn-header">Produtos</button>
@@ -83,6 +83,7 @@
     <main>
 
         <div class="promotions">
+
             <div class="promotions-opacity">
                 <div class="container promotions-body">
                     <div class="tittle-promotions">
@@ -94,6 +95,44 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container">
+                <div class="purchase-screen">
+                    <div class="purchase-screen-body">
+                        <div class="purchase-screen-body-left">
+                            <div class="purchase-screen-body-left-images">
+                                <div class="purchase-screen-body-left-image1">
+                                    <img src="public/imgs/produtos/1.png" alt="">
+                                </div>
+                                <div class="purchase-screen-body-left-image2">
+                                    <img src="public/imgs/produtos/1-1.png" alt="">
+                                </div>
+                                <div class="purchase-screen-body-left-image3">
+                                    <img src="public/imgs/produtos/1-2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="purchase-screen-body-left-main-image">
+                                <img src="public/imgs/produtos/1.png" alt="">
+                            </div>
+                        </div>
+                        <div class="purchase-screen-body-right">
+                            <div class="purchase-screen-body-right-content">
+                                <h2>PLACA DE VÍDEO RTX 4090 24GB SG GDDR6X 384BITS</h2>
+                                <p>49NXM5MD6DSG</p>
+                                <div class="purchase-screen-body-right-content-img">
+                                    <img src="public/imgs/fornecedores/1.jpg" alt="">
+                                </div>
+                                <h1>R$ 13.447,17</h1>
+                                <div class="purchase-screen-body-right-content-buttons">
+                                    <button type="button" id="button-buy" class="btn btn-success">Adicionar ao carrinho <i class="fa-solid fa-cart-plus"></i></button>
+                                    <button type="button" class="btn btn-danger" onclick="fechaProdutos()">Cancelar <i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="who-we-are">
@@ -104,13 +143,13 @@
 
     </main>
 
-
     <!-- Links JavaScript: -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" defer integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
     <script src="public/js/promocoes.js" defer></script>
     <script src="public/js/scripts.js" defer></script>
+
 </body>
 
 </html>
