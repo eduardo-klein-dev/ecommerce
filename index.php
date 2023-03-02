@@ -42,7 +42,7 @@
                             <button type="button" class="btn-header active">Início</button>
                         </li>
                         <li>
-                            <button type="button" class="btn-header">Produtos</button>
+                            <button type="button" onblur="productsOnBlur()" id="button-products" class="btn-header">Produtos</button>
                         </li>
                         <li>
                             <button type="button" class="btn-header">Quem somos</button>
@@ -54,9 +54,34 @@
                 </div>
             </nav>
         </div>
+
+        <div class="list-products">
+            <ul>
+                <li>
+                    <a href="">Cadeiras Gamers</a>
+                </li>
+                <li>
+                    <a href="">Periféricos</a>
+                </li>
+                <li>
+                    <a href="">Acessórios</a>
+                </li>
+                <li>
+                    <a href="">Cpus e Notebooks</a>
+                </li>
+                <li>
+                    <a href="">Hardware</a>
+                </li>
+                <li>
+                    <a href="">Energia e Rede</a>
+                </li>
+            </ul>
+        </div>
+
     </header>
 
     <main>
+
         <div class="promotions">
             <div class="promotions-opacity">
                 <div class="container promotions-body">
@@ -70,7 +95,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="who-we-are">
+            <div class="container">
+
+            </div>
         </div>
+
     </main>
 
 
@@ -79,7 +110,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
     <script src="public/js/promocoes.js" defer></script>
-
+    <script src="public/js/scripts.js" defer></script>
 </body>
 
 </html>

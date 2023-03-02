@@ -22,24 +22,21 @@ $(function () {
 				if (primeiro) {
 					html += '<div class="carousel-item active" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion"><div class="item-promotion-imagem"><img src="' + json[i].imagem + '" /></div><div class="item-promotion-tittle">' + json[i].titulo + '</div><div class="item-promotion-preco">' + json[i].preço + '</div></div>';
 					primeiro = false;
-					console.log('PRIMEIRO: ' + contador);
+					
 				} else {
 
 					if (calculo == 0) {
 						html += '</div></div><div class="carousel-item" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion"><div class="item-promotion-imagem"><img src="' + json[i].imagem + '" /></div><div class="item-promotion-tittle">' + json[i].titulo + '</div><div class="item-promotion-preco">' + json[i].preço + '</div></div>';
-						console.log('SEGUNDO: ' + contador);
 					}
 
 					else {
 						html += '<div class="item-promotion"><div class="item-promotion-imagem"><img src="' + json[i].imagem + '" /></div><div class="item-promotion-tittle">' + json[i].titulo + '</div><div class="item-promotion-preco">' + json[i].preço + '</div></div>';
-						console.log('D: ' + contador);
 					}
 					
 				}
 			}
 			html += '</div>';
 			$('.carousel-inner').html(html);
-			console.log(html)
 
 		}
 	});
