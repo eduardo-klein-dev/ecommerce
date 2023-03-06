@@ -229,6 +229,7 @@ header {
 .purchase-screen-body-left-image3 {
     width: 120px;
     height: 120px;
+    cursor: pointer;
 }
 
 .purchase-screen-body-left-image1 img,
@@ -274,7 +275,7 @@ header {
     text-align: center;
 }
 .purchase-screen-body-right-content p {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 16px; 
     font-style: italic;
 }
@@ -294,8 +295,31 @@ header {
     margin-top: 30px;
 }
 
+.price {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+    margin: auto;
+}
+
+.total_price {
+    text-decoration: line-through;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.discount {
+    color: rgba(255, 0, 0, 1);
+}
+
 #button-buy {
     width: 300px;
+    margin-right: 10px;
+}
+
+.discount_price {
+    margin-bottom: -10px;
 }
 
 /* Who We Are: */
