@@ -22,17 +22,17 @@ $(function () {
 
 				if (primeiro) {
 
-					html += '<div class="carousel-item active" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion" id='+json[i].id+' onclick="openScreenBuyPromo('+json[i].id+')"><div class="item-promotion-imagem"><img src="public/imgs/produtos/' + json[i].id + '.png" /></div><div class="item-promotion-tittle">' + json[i].apelido + '</div><div class="item-promotion-preco">' + json[i].valor + '</div></div>';
+					html += '<div class="carousel-item active" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion" id='+json[i].id+' onclick="openScreenBuyPromo('+json[i].id+')"><div class="item-promotion-imagem"><img src="public/imgs/produtos/' + json[i].id + '.png" /></div><div class="item-promotion-tittle">' + json[i].apelido + '</div><div class="item-promotion-preco">R$ ' + json[i].valor + '</div></div>';
 					primeiro = false;
 
 				} else {
 
 					if (calculo == 0) {
-						html += '</div></div><div class="carousel-item" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion" id='+json[i].id+' onclick="openScreenBuyPromo('+json[i].id+')"><div class="item-promotion-imagem"><img src="public/imgs/produtos/' + json[i].id + '.png" /></div><div class="item-promotion-tittle">' + json[i].apelido + '</div><div class="item-promotion-preco">' + json[i].valor + '</div></div>';
+						html += '</div></div><div class="carousel-item" data-bs-interval="3000"><div class="slide w-100"><div class="item-promotion" id='+json[i].id+' onclick="openScreenBuyPromo('+json[i].id+')"><div class="item-promotion-imagem"><img src="public/imgs/produtos/' + json[i].id + '.png" /></div><div class="item-promotion-tittle">' + json[i].apelido + '</div><div class="item-promotion-preco">R$ ' + json[i].valor + '</div></div>';
 					}
 
 					else {
-						html += '<div class="item-promotion" id="'+json[i].id+'" onclick="openScreenBuyPromo('+json[i].id+')"><div class="item-promotion-imagem"><img src="public/imgs/produtos/' + json[i].id + '.png" /></div><div class="item-promotion-tittle">' + json[i].apelido + '</div><div class="item-promotion-preco">' + json[i].valor + '</div></div>';
+						html += '<div class="item-promotion" id="'+json[i].id+'" onclick="openScreenBuyPromo('+json[i].id+')"><div class="item-promotion-imagem"><img src="public/imgs/produtos/' + json[i].id + '.png" /></div><div class="item-promotion-tittle">' + json[i].apelido + '</div><div class="item-promotion-preco">R$ ' + json[i].valor + '</div></div>';
 					}
 
 				}

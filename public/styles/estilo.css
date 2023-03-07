@@ -17,7 +17,41 @@ body {
     border-radius: 5px;
 }
 
+.cart {
+    font-size: 25px;
+    margin-top: 5px;
+}
+
 /* Header: */
+
+.login-cart {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 10px;
+    z-index: 99;
+    color: white
+}
+
+.login-cart-body {
+    display: flex;
+    flex-direction: row;
+    margin-top: -20px;
+}
+
+.login {
+    margin-right: 10px;
+}
+
+.login a,
+.login a:hover,
+.cadastro a,
+.cadastro a:hover{
+    text-decoration: none;
+    color: #FFF;
+    text-decoration: underline;
+}
 
 header {
     background-color: #141414;
@@ -58,6 +92,7 @@ header {
     list-style: none;
     display: flex;
     flex-direction: row;
+    margin-right: 30px;
 }
 
 .btn-header {
@@ -282,8 +317,8 @@ header {
 
 .purchase-screen-body-right-content-img {
     margin: auto;
-    width: 300px;
-    height: 100px;
+    width: 240px;
+    height: 85px;
 }
 
 .purchase-screen-body-right-content-img img{
@@ -319,7 +354,49 @@ header {
 }
 
 .discount_price {
+    margin-bottom: 0px;
+}
+
+.quantity_products {
+    margin: auto;
+    margin-top: 5px;
     margin-bottom: -10px;
+    background-color: #eeeeee;
+    width: 90px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.quantity_products-body {
+    font-family: 'Roboto Condensed', sans-serif;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    color: #141414;
+    text-align: center;
+    cursor: pointer;
+}
+
+.quantity_products_more,
+.quantity_products_less {
+    font-size: 22px;
+}
+
+.quantity_products_more {
+    padding-left: 10px;
+}
+
+.quantity_products_less {
+    padding-right: 10px;
+}
+
+.quantity_products_number {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 20px;
+    border-left: 1px solid #141414;
+    border-right: 1px solid #141414;
 }
 
 /* Who We Are: */

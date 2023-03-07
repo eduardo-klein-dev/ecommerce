@@ -21,6 +21,16 @@
 <body>
 
     <header>
+
+        <div class="login-cart">
+            <p>Bem Vindo!</p>
+            <div class="login-cart-body">
+                <div class="login"><a href="">Entrar</a></div>
+                <div class="cadastro"><a href="">Cadastrar</a></div>
+            </div>
+            <div class="cart"><i class="fa-solid fa-cart-shopping"></i></div>
+        </div>
+
         <div class="container header">
             <div class="header-logo">
                 <div class="imagem-logo">
@@ -97,16 +107,16 @@
             </div>
 
             <div class="container">
-                <div class="purchase-screen"></div>
+                <div class="purchase-screen">
+                    <div class="container">
+
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div class="who-we-are">
-            <div class="container">
-
-            </div>
-        </div>
+        <div class="who-we-are"></div>
 
     </main>
 
