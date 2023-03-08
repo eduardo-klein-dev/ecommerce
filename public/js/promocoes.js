@@ -2,7 +2,7 @@
 $(function () {
 
 	$.ajax({
-		url: 'http://localhost:8000/api/ecommerce/promotionsnew',
+		url: 'http://d06a0002n.dfs.local:8000/api/ecommerce/promotionsnew/',
 		type: 'GET',
 		dataType: 'json',
 

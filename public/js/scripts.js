@@ -1,9 +1,17 @@
 "use strict";
+var valor = $('#sessionID').val();
+var idProdutoInserido = '';
+var idProduto = 0;
+var qtdeProduto = 0;
+var cart = [];
+
 const button = document.querySelector('#button-products');
 const products = document.querySelector('.list-products');
 const start = document.querySelector('#button-start');
 const purchase_screen = document.querySelector('.purchase-screen');
+const carrinho = document.querySelector('.popup-cart');
 products.style.display = 'none';
+
 button.addEventListener('click', () => {
     if (products.style.display == 'none') {
         products.style.display = 'block';
@@ -31,9 +39,8 @@ function fechaProdutos() {
 }
 
 function ScrenBuyItemPromo(id) {
-    console.log('http://localhost:8000/api/ecommerce/promotionsnew/' + id)
     $.ajax({
-        url: 'http://localhost:8000/api/ecommerce/promotionsnew/' + id,
+        url: 'http://d06a0002n.dfs.local:8000/api/ecommerce/promotionsnew/' + id,
         type: 'GET',
         dataType: 'json',
 
@@ -45,16 +52,13 @@ function ScrenBuyItemPromo(id) {
 
             for (var i in json) {
 
-                document.querySelector('.purchase-screen').innerHTML = '<div class="purchase-screen-body"><div class="purchase-screen-body-left"><div class="purchase-screen-body-left-images"><div class="purchase-screen-body-left-image1"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="purchase-screen-body-left-image2"><img src="public/imgs/produtos/' + json[i].id + '-1.png" alt=""></div><div class="purchase-screen-body-left-image3"><img src="public/imgs/produtos/' + json[i].id + '-2.png" alt=""></div></div><div class="purchase-screen-body-left-main-image"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div></div><div class="purchase-screen-body-right"><div class="purchase-screen-body-right-content"><h3>' + json[i].produto + '</h3><p>' + json[i].serial + '</p><div class="purchase-screen-body-right-content-img"><img src="public/imgs/fornecedores/' + json[i].fornecedor + '.png" alt=""></div><div class="price"><h5 class="total_price"> R$ ' + json[i].valor + '</h5><h5 class="discount">-' + json[i].desconto + '%</h5></div><div class="discount_price"></div><div class="quantity_products"><div class="quantity_products-body"><div class="quantity_products_more">+</div><div class="quantity_products_number">1</div><div class="quantity_products_less">-</div></div></div><div class="purchase-screen-body-right-content-buttons"><button type="button" id="button-buy" class="btn btn-success">Adicionar ao carrinho <i class="fa-solid fa-cart-plus"></i></button><button type="button" class="btn btn-danger" onclick="fechaProdutos()">Cancelar <i class="fa-solid fa-xmark"></i></button></div></div></div></div>';
+                document.querySelector('.purchase-screen').innerHTML = '<div class="purchase-screen-body"><div class="purchase-screen-body-left"><div class="purchase-screen-body-left-images"><div class="purchase-screen-body-left-image1"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="purchase-screen-body-left-image2"><img src="public/imgs/produtos/' + json[i].id + '-1.png" alt=""></div><div class="purchase-screen-body-left-image3"><img src="public/imgs/produtos/' + json[i].id + '-2.png" alt=""></div></div><div class="purchase-screen-body-left-main-image"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div></div><div class="purchase-screen-body-right"><div class="purchase-screen-body-right-content"><h4>' + json[i].produto + '</h4><p>' + json[i].serial + '</p><div class="purchase-screen-body-right-content-img"><img src="public/imgs/fornecedores/' + json[i].fornecedor + '.png" alt=""></div><div class="price"><h5 class="total_price"> R$ ' + json[i].valor + '</h5><h5 class="discount">-' + json[i].desconto + '%</h5></div><div class="discount_price"></div><div class="quantity_products"><div class="quantity_products-body"><div class="quantity_products_less">-</div><div class="quantity_products_number"></div><div class="quantity_products_more">+</div></div></div><div class="qtde-item"><em>Estoque: ' + json[i].estoque + '</em></div><div class="purchase-screen-body-right-content-buttons"><button action="" method="post" type="button" id="button-buy" class="add-item btn btn-success">Adicionar ao carrinho <i class="fa-solid fa-cart-plus"></i></button><button type="button" class="btn btn-danger" onclick="fechaProdutos()">Cancelar <i class="fa-solid fa-xmark"></i></button></div></div></div></div>';
 
                 let preco = document.querySelector('.discount_price');
                 var html = ' '
 
                 var valor1 = parseFloat(json[i].valor).toFixed(2);
                 var valor2 = ((valor1 * json[i].desconto) / 100).toFixed(2);
-
-                console.log('VALOR1: ' + valor1)
-                console.log('VALOR2: ' + valor2)
 
                 var total = (valor1 - valor2).toFixed(2);
                 var total_string = total.toString();
@@ -89,18 +93,90 @@ function ScrenBuyItemPromo(id) {
                 var button_remove = document.querySelector(".quantity_products_less");
                 var number_marker = document.querySelector(".quantity_products_number");
 
-                
+                var qtde = 1;
+                number_marker.innerHTML = qtde;
+
+                function addNumberQtde() {
+                    qtde = qtde + 1;
+                }
+                function removeNumberQtde() {
+                    qtde = qtde - 1;
+                }
+
+                button_add.addEventListener('click', () => {
+                    if (qtde < json[i].estoque) {
+                        addNumberQtde();
+                        number_marker.innerHTML = qtde;
+                    } else {
+                        qtde = qtde;
+                        alert("Você já atingiu o quantida máxima em estoque!");
+                    }
+                });
+
+                button_remove.addEventListener('click', () => {
+                    if (qtde > 1) {
+                        removeNumberQtde();
+                        number_marker.innerHTML = qtde;
+                    } else {
+                        qtde = qtde;
+                    }
+                });
+
+
+                var buttonAdd = document.querySelector(".add-item");
+
+                buttonAdd.addEventListener('click', () => {
+                    idProduto = json[i].id;
+                    qtdeProduto = qtde;
+                    idProdutoInserido = valor;
+                    
+                    cart.push({
+                        id: idProduto,
+                        qtd: qtdeProduto
+                    });
+
+                    console.log(cart)
+
+                    purchase_screen.style.display = 'none';
+                    carrinho.style.display = 'block';
+                    addItemPedido();
+                   
+                });
 
             }
         }
     });
 };
 
-function openScreenBuyPromo(id) {
 
+function openScreenBuyPromo(id) {
     var promo = document.querySelector('.purchase-screen');
     promo.style.display = 'block'
-
     ScrenBuyItemPromo(id);
+};
 
+function insereItensPedido() {
+    
+     $.ajax({
+         url: 'http://d06a0002n.dfs.local:8000/api/ecommerce/promotionsnew/' +idProdutoInserido + '/' + idProduto + '/' + qtdeProduto,
+         type: 'POST',
+
+         beforeSend: function () {
+            // console.log('/api/ecommerce/enviaitempedido/' + idProdutoInserido + '/' + idProduto + '/' + qtdeProduto)
+         },
+
+         success: function () {
+            // console.log("Deu certo!")
+         },
+
+         error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Erro na requisição:", jqXHR.responseText);
+            console.log("Status da requisição:", textStatus);
+            console.log("Erro lançado:", errorThrown);
+         }
+     });
+};
+
+function addItemPedido(idProdutoInserido, idProduto, qtdeProduto) {
+    insereItensPedido(idProdutoInserido, idProduto, qtdeProduto);
 };

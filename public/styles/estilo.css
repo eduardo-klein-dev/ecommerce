@@ -22,6 +22,17 @@ body {
     margin-top: 5px;
 }
 
+.popup-cart {
+    display: none;
+    width: 10px;
+    height: 10px;
+    background-color: deepskyblue;
+    border-radius: 10px;
+    position: absolute;
+    right: 40px;
+    top: 70px
+}
+
 /* Header: */
 
 .login-cart {
@@ -30,6 +41,7 @@ body {
     flex-direction: column;
     position: absolute;
     right: 10px;
+    top: 10px; 
     z-index: 99;
     color: white
 }
@@ -310,7 +322,7 @@ header {
     text-align: center;
 }
 .purchase-screen-body-right-content p {
-    margin-top: 10px;
+    margin-top: 0px;
     font-size: 16px; 
     font-style: italic;
 }
@@ -360,7 +372,6 @@ header {
 .quantity_products {
     margin: auto;
     margin-top: 5px;
-    margin-bottom: -10px;
     background-color: #eeeeee;
     width: 90px;
     height: 30px;
@@ -375,20 +386,20 @@ header {
     justify-content: space-around;
     color: #141414;
     text-align: center;
-    cursor: pointer;
 }
 
 .quantity_products_more,
 .quantity_products_less {
     font-size: 22px;
+    cursor: pointer;
 }
 
 .quantity_products_more {
-    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .quantity_products_less {
-    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .quantity_products_number {
@@ -397,6 +408,10 @@ header {
     font-size: 20px;
     border-left: 1px solid #141414;
     border-right: 1px solid #141414;
+}
+
+.qtde-item {
+    margin-bottom: -20px;
 }
 
 /* Who We Are: */
