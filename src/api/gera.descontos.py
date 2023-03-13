@@ -20,5 +20,9 @@ def svcProdutosPromoItens(id):
 def svcProdutosPedido(idProdutoInserido, idProduto, qtdeProduto):
     return svc.insereItensPedido(idProdutoInserido, format(idProduto), format(qtdeProduto))
 
+@app.route('/api/ecommerce/consultacart/<string:idProdutoInserido>', methods=['GET'])
+def svcConsultaItensCart(idProdutoInserido):
+    return svc.ConsultaItensCart(idProdutoInserido)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

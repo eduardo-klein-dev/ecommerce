@@ -1,6 +1,7 @@
 "use strict";
 var valor = $('#sessionID').val();
 var idProdutoInserido = '';
+idProdutoInserido = valor;
 var idProduto = 0;
 var qtdeProduto = 0;
 var cart = [];
@@ -128,8 +129,8 @@ function ScrenBuyItemPromo(id) {
                 buttonAdd.addEventListener('click', () => {
                     idProduto = json[i].id;
                     qtdeProduto = qtde;
-                    idProdutoInserido = valor;
-                    
+                    console.log()
+
                     cart.push({
                         id: idProduto,
                         qtd: qtdeProduto
@@ -140,7 +141,7 @@ function ScrenBuyItemPromo(id) {
                     purchase_screen.style.display = 'none';
                     carrinho.style.display = 'block';
                     addItemPedido();
-                   
+
                 });
 
             }
@@ -156,27 +157,100 @@ function openScreenBuyPromo(id) {
 };
 
 function insereItensPedido() {
-    
-     $.ajax({
-         url: 'http://d06a0002n.dfs.local:8000/api/ecommerce/promotionsnew/' +idProdutoInserido + '/' + idProduto + '/' + qtdeProduto,
-         type: 'POST',
 
-         beforeSend: function () {
-            // console.log('/api/ecommerce/enviaitempedido/' + idProdutoInserido + '/' + idProduto + '/' + qtdeProduto)
-         },
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/ecommerce/enviaitempedido/' + idProdutoInserido + '/' + idProduto + '/' + qtdeProduto,
+        type: 'POST',
 
-         success: function () {
+        beforeSend: function () {
+            console.log('/api/ecommerce/enviaitempedido/' + idProdutoInserido + '/' + idProduto + '/' + qtdeProduto)
+        },
+
+        success: function () {
             // console.log("Deu certo!")
-         },
+        },
 
-         error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
             console.log("Erro na requisição:", jqXHR.responseText);
             console.log("Status da requisição:", textStatus);
             console.log("Erro lançado:", errorThrown);
-         }
-     });
+        }
+    });
 };
 
 function addItemPedido(idProdutoInserido, idProduto, qtdeProduto) {
     insereItensPedido(idProdutoInserido, idProduto, qtdeProduto);
 };
+
+var BtnCarrinhoCompras = document.querySelector(".cart");
+BtnCarrinhoCompras.addEventListener('click', () => {
+    var telaRevisaoPedido = document.querySelector("order-completion-screen");
+    ScrenCartBody(valor);
+    verificaCarrinho(valor);
+});
+
+function ScrenCartBody(valor) {
+    $.ajax({
+        url: 'http://d06a0002n.dfs.local:8000/api/ecommerce/consultacart/' + valor,
+        type: 'GET',
+        dataType: 'json',
+
+        beforeSend: function () {
+            $('.purchase-screen').html('<div style="margin-top:20px; color:#141414;" class="carregando col-md-12">Carregando...</div>');
+        },
+
+        success: function (json) {
+            var i;
+            var html = '';
+            var price = ' '
+            var valor = 0;
+            var desconto = 0;
+
+            for (i = 0; i < Object.keys(json).length; i++) {
+                html += '<div class="order-completion-screen-content-body-item"><div class="order-completion-screen-content-body-item-img"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="order-completion-screen-content-body-item-text"><p>' + json[i].apelido + '</p><p style="font-style: italic;">Quantidade: ' + json[i].estoque + '</p><div id="price-discont"><p style="font-style: italic;">Valor Original:<p style="margin-left: 5px;">R$ ' + json[i].valor + '</p></p><p style="margin-left: 5px;color: red;">-' + json[i].desconto + '%</p></div><div id="total-price"><p style="font-style: italic;">Valor Total: </p><div class="total-price-discont-'+ json[i].id +'" style="margin-left: 5px"></div></div></div><div class="order-completion-screen-content-body-item-icon"><i class="fa-solid fa-trash-can"></i></div></div>';
+
+                valor = json[i].valor;
+                desconto = json[i].desconto;
+
+                var valor1 = parseFloat(valor).toFixed(2);
+                var valor2 = ((valor1 * desconto) / 100).toFixed(2);
+
+                var total = (valor1 - valor2).toFixed(2);
+                var total_string = total.toString();
+                var total_formatado = total_string.replace('.', ',')
+
+                price = `R$ ${total_formatado}`;
+
+                document.querySelector('.order-completion-screen-content-body').innerHTML = html;
+                console.log(document.querySelector('.total-price-discont-'+ json[i].id +''))
+                document.querySelector('.total-price-discont-'+ json[i].id +'').innerHTML = price;
+            };
+
+        }
+    });
+};
+
+var carrinhoVazio = document.querySelector('.order-completion-screen-empty-display');
+var carrinhoCheio = document.querySelector('.order-completion-screen-content-display');
+
+function verificaCarrinho(idProdutoInserido) {
+    console.log('http://localhost:8000//api/ecommerce/consultacart/' + idProdutoInserido)
+    fetch('http://localhost:8000//api/ecommerce/consultacart/' + idProdutoInserido)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao consultar itens do carrinho');
+            }
+            return response.json();
+        })
+        .then(data => {
+            var quantosItens = Object.keys(data).length;
+            if (quantosItens > 0) {
+                carrinhoCheio.style.display = 'block';
+            } else {
+                carrinhoVazio.style.display = 'block';
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
