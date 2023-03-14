@@ -61,6 +61,20 @@ body {
     color: #FFF;
 }
 
+.sublime-cart {
+    margin-top: -5px;
+    width: 215px;
+    height: 2px;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+
+.close-cart {
+    margin-top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
 .order-completion-screen-empty-body i {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -88,6 +102,7 @@ body {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
+    line-height: 25px;
 }
 
 .order-completion-screen-content-body-item-img {
@@ -101,13 +116,14 @@ body {
 
 .order-completion-screen-content-body-item-text {
     margin-left: 10px;
+    width: 250px;
 }
 
 .order-completion-screen-content-body-item-text h5 {
     text-align: center;
 }
 
-.order-completion-screen-content-body-item-text p{
+.order-completion-screen-content-body-item-text p {
     margin-top: 0px;
     margin-bottom: 0px;
     text-align: start;
@@ -121,8 +137,9 @@ body {
 }
 
 .order-completion-screen-content-body-item-icon {
-    padding-top: 30px;
+    padding-top: 40px;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 .login-cart {
@@ -131,7 +148,7 @@ body {
     flex-direction: column;
     position: absolute;
     right: 10px;
-    top: 10px; 
+    top: 10px;
     z-index: 99;
     color: white
 }
@@ -149,7 +166,7 @@ body {
 .login a,
 .login a:hover,
 .cadastro a,
-.cadastro a:hover{
+.cadastro a:hover {
     text-decoration: none;
     color: #FFF;
     text-decoration: underline;
@@ -302,7 +319,7 @@ header {
     display: none;
     position: absolute;
     z-index: 99;
-    right: 335px;
+    right: 370px;
     top: 85px;
     background-color: #e9e9e9;
     color: #141414;
@@ -411,9 +428,10 @@ header {
     flex-direction: column;
     text-align: center;
 }
+
 .purchase-screen-body-right-content p {
     margin-top: 0px;
-    font-size: 16px; 
+    font-size: 16px;
     font-style: italic;
 }
 
@@ -423,7 +441,7 @@ header {
     height: 85px;
 }
 
-.purchase-screen-body-right-content-img img{
+.purchase-screen-body-right-content-img img {
     width: 100%;
     height: 100%;
 }

@@ -1,4 +1,4 @@
-"use strict";
+// Declaração de Variáveis:
 var valor = $('#sessionID').val();
 var idProdutoInserido = '';
 idProdutoInserido = valor;
@@ -11,6 +11,11 @@ const products = document.querySelector('.list-products');
 const start = document.querySelector('#button-start');
 const purchase_screen = document.querySelector('.purchase-screen');
 const carrinho = document.querySelector('.popup-cart');
+const telaComprasVazia = document.querySelector('.order-completion-screen-empty-display');
+const telaComprasItens = document.querySelector('.order-completion-screen-content-display');
+const fechaTelaItem = document.querySelector('.close-cart');
+
+// Eventos de Click:
 products.style.display = 'none';
 
 button.addEventListener('click', () => {
@@ -27,18 +32,28 @@ button.addEventListener('click', () => {
 });
 function productsOnBlur() {
     if (products.style.display == 'block') {
-        products.style.display = 'none';
+        products.style.display = 'none'
+            ;
         start.classList.add('active');
         button.classList.remove('active');
     }
     else {
         products.style.display = 'none';
     }
-}
+};
 function fechaProdutos() {
     purchase_screen.style.display = 'none';
 }
 
+function fechaTelaItemCart() {
+    telaComprasItens.style.display = 'none';
+}
+
+function fechaTelaVaziaCart() {
+    telaComprasVazia.style.display = 'none';
+}
+
+// Eventos de Json(API):
 function ScrenBuyItemPromo(id) {
     $.ajax({
         url: 'http://d06a0002n.dfs.local:8000/api/ecommerce/promotionsnew/' + id,
@@ -55,19 +70,14 @@ function ScrenBuyItemPromo(id) {
 
                 document.querySelector('.purchase-screen').innerHTML = '<div class="purchase-screen-body"><div class="purchase-screen-body-left"><div class="purchase-screen-body-left-images"><div class="purchase-screen-body-left-image1"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="purchase-screen-body-left-image2"><img src="public/imgs/produtos/' + json[i].id + '-1.png" alt=""></div><div class="purchase-screen-body-left-image3"><img src="public/imgs/produtos/' + json[i].id + '-2.png" alt=""></div></div><div class="purchase-screen-body-left-main-image"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div></div><div class="purchase-screen-body-right"><div class="purchase-screen-body-right-content"><h4>' + json[i].produto + '</h4><p>' + json[i].serial + '</p><div class="purchase-screen-body-right-content-img"><img src="public/imgs/fornecedores/' + json[i].fornecedor + '.png" alt=""></div><div class="price"><h5 class="total_price"> R$ ' + json[i].valor + '</h5><h5 class="discount">-' + json[i].desconto + '%</h5></div><div class="discount_price"></div><div class="quantity_products"><div class="quantity_products-body"><div class="quantity_products_less">-</div><div class="quantity_products_number"></div><div class="quantity_products_more">+</div></div></div><div class="qtde-item"><em>Estoque: ' + json[i].estoque + '</em></div><div class="purchase-screen-body-right-content-buttons"><button action="" method="post" type="button" id="button-buy" class="add-item btn btn-success">Adicionar ao carrinho <i class="fa-solid fa-cart-plus"></i></button><button type="button" class="btn btn-danger" onclick="fechaProdutos()">Cancelar <i class="fa-solid fa-xmark"></i></button></div></div></div></div>';
 
+                var valor1 = json[i].valor;
+                var novoValor1 = valor1.replace(".", "").replace(",", ".");
+                var valor2 = ((novoValor1 * json[i].desconto) / 100).toFixed(2);
+                var total = (novoValor1 - valor2);
+                var totalFormatado = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
                 let preco = document.querySelector('.discount_price');
-                var html = ' '
-
-                var valor1 = parseFloat(json[i].valor).toFixed(2);
-                var valor2 = ((valor1 * json[i].desconto) / 100).toFixed(2);
-
-                var total = (valor1 - valor2).toFixed(2);
-                var total_string = total.toString();
-                var total_formatado = total_string.replace('.', ',')
-
-
-                html = `R$ ${total_formatado}`;
-                preco.innerHTML = `<h3>` + html + `</h3>`;
+                preco.innerHTML = '<h4>R$ ' + totalFormatado + '</h4>';
 
                 var foto1 = document.querySelector('.purchase-screen-body-left-image1');
                 var foto2 = document.querySelector('.purchase-screen-body-left-image2');
@@ -129,14 +139,11 @@ function ScrenBuyItemPromo(id) {
                 buttonAdd.addEventListener('click', () => {
                     idProduto = json[i].id;
                     qtdeProduto = qtde;
-                    console.log()
 
                     cart.push({
                         id: idProduto,
                         qtd: qtdeProduto
                     });
-
-                    console.log(cart)
 
                     purchase_screen.style.display = 'none';
                     carrinho.style.display = 'block';
@@ -153,6 +160,8 @@ function ScrenBuyItemPromo(id) {
 function openScreenBuyPromo(id) {
     var promo = document.querySelector('.purchase-screen');
     promo.style.display = 'block'
+    telaComprasVazia.style.display = 'none';
+    telaComprasItens.style.display = 'none';
     ScrenBuyItemPromo(id);
 };
 
@@ -162,19 +171,9 @@ function insereItensPedido() {
         url: 'http://127.0.0.1:8000/api/ecommerce/enviaitempedido/' + idProdutoInserido + '/' + idProduto + '/' + qtdeProduto,
         type: 'POST',
 
-        beforeSend: function () {
-            console.log('/api/ecommerce/enviaitempedido/' + idProdutoInserido + '/' + idProduto + '/' + qtdeProduto)
-        },
+        beforeSend: function () { },
 
-        success: function () {
-            // console.log("Deu certo!")
-        },
-
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("Erro na requisição:", jqXHR.responseText);
-            console.log("Status da requisição:", textStatus);
-            console.log("Erro lançado:", errorThrown);
-        }
+        success: function () { },
     });
 };
 
@@ -184,6 +183,8 @@ function addItemPedido(idProdutoInserido, idProduto, qtdeProduto) {
 
 var BtnCarrinhoCompras = document.querySelector(".cart");
 BtnCarrinhoCompras.addEventListener('click', () => {
+    var promo = document.querySelector('.purchase-screen');
+    promo.style.display = 'none'
     var telaRevisaoPedido = document.querySelector("order-completion-screen");
     ScrenCartBody(valor);
     verificaCarrinho(valor);
@@ -207,24 +208,21 @@ function ScrenCartBody(valor) {
             var desconto = 0;
 
             for (i = 0; i < Object.keys(json).length; i++) {
-                html += '<div class="order-completion-screen-content-body-item"><div class="order-completion-screen-content-body-item-img"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="order-completion-screen-content-body-item-text"><p>' + json[i].apelido + '</p><p style="font-style: italic;">Quantidade: ' + json[i].estoque + '</p><div id="price-discont"><p style="font-style: italic;">Valor Original:<p style="margin-left: 5px;">R$ ' + json[i].valor + '</p></p><p style="margin-left: 5px;color: red;">-' + json[i].desconto + '%</p></div><div id="total-price"><p style="font-style: italic;">Valor Total: </p><div class="total-price-discont-'+ json[i].id +'" style="margin-left: 5px"></div></div></div><div class="order-completion-screen-content-body-item-icon"><i class="fa-solid fa-trash-can"></i></div></div>';
-
-                valor = json[i].valor;
-                desconto = json[i].desconto;
-
-                var valor1 = parseFloat(valor).toFixed(2);
-                var valor2 = ((valor1 * desconto) / 100).toFixed(2);
-
-                var total = (valor1 - valor2).toFixed(2);
-                var total_string = total.toString();
-                var total_formatado = total_string.replace('.', ',')
-
-                price = `R$ ${total_formatado}`;
-
+                html += '<div class="order-completion-screen-content-body-item"><div class="order-completion-screen-content-body-item-img"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="order-completion-screen-content-body-item-text"><p>' + json[i].apelido + '</p><p style="font-style: italic;">Quantidade: ' + json[i].estoque + '</p><div id="price-discont"><p style="font-style: italic;">Valor Original Item:<p style="margin-left: 8px;font-style: italic;text-decoration: line-through;">R$ ' + json[i].valor + '</p></p><p style="margin-left: 8px;color: red;font-style: italic;">-' + json[i].desconto + '%</p></div><div id="total-price"><p style="font-style: italic;">Valor Total Item: </p><div class="total-price-discont-' + json[i].id + '" style="margin-left: 8px;font-style: italic;"></div></div></div><div class="order-completion-screen-content-body-item-icon"><i class="fa-solid fa-trash-can"></i></div></div>';
                 document.querySelector('.order-completion-screen-content-body').innerHTML = html;
-                console.log(document.querySelector('.total-price-discont-'+ json[i].id +''))
-                document.querySelector('.total-price-discont-'+ json[i].id +'').innerHTML = price;
             };
+
+            for (i in json) {
+
+                var valor1 = json[i].valor;
+                var novoValor1 = valor1.replace(".", "").replace(",", ".");
+                var valor2 = ((novoValor1 * json[i].desconto) / 100).toFixed(2);
+                var total = (novoValor1 - valor2);
+                var totalFormatado = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+                document.querySelector('.total-price-discont-' + json[i].id + '').innerHTML = '<p>R$ ' + totalFormatado + '</p>';
+
+            }
 
         }
     });
@@ -234,7 +232,6 @@ var carrinhoVazio = document.querySelector('.order-completion-screen-empty-displ
 var carrinhoCheio = document.querySelector('.order-completion-screen-content-display');
 
 function verificaCarrinho(idProdutoInserido) {
-    console.log('http://localhost:8000//api/ecommerce/consultacart/' + idProdutoInserido)
     fetch('http://localhost:8000//api/ecommerce/consultacart/' + idProdutoInserido)
         .then(response => {
             if (!response.ok) {
@@ -244,13 +241,34 @@ function verificaCarrinho(idProdutoInserido) {
         })
         .then(data => {
             var quantosItens = Object.keys(data).length;
+            console.log(quantosItens)
+
             if (quantosItens > 0) {
                 carrinhoCheio.style.display = 'block';
             } else {
                 carrinhoVazio.style.display = 'block';
             }
         })
-        .catch(error => {
-            console.error(error);
-        });
 }
+
+function verificaCarrinhoPopUp(idProdutoInserido) {
+    fetch('http://localhost:8000/api/ecommerce/consultacart/' + idProdutoInserido)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao consultar itens do carrinho');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(idProdutoInserido)
+            console.log("CHEGOU AQUI BB!")
+            console.log(data.length)
+            var quantosItens = Object.keys(data).length;
+            console.log(quantosItens)
+            if (quantosItens > 0) {
+                carrinho.style.display = 'block';
+            } else {
+                carrinho.style.display = 'none';
+            };
+        });
+};

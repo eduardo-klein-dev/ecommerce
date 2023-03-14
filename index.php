@@ -29,7 +29,7 @@
 
  </head>
 
- <body>
+ <body onload="verificaCarrinhoPopUp(idProdutoInserido)">
 
      <header>
          <input style="display:none" type="text" id="sessionID" value="<?= $idSession ?>" />
@@ -52,15 +52,17 @@
                      <h5>Infelizmente você ainda não incluiu nenhum item em seu carrinho!</h5>
                      <i class="fa-regular fa-face-sad-tear"></i>
                      <h5>Porém você pode dar uma olhada em nossos produtos, temos certeza que irá gostar de algo!</h5>
-                     <button class="btn">Conhecer os Produtos</button>
+                     <button onclick="fechaTelaVaziaCart()" class="btn">Conhecer os Produtos</button>
                  </div>
              </div>
          </div>
          <div class="order-completion-screen-content-display" style="display: none;">
              <div class="order-completion-screen-content">
                  <h4>Carrinho de compras:</h4>
+                 <div class="sublime-cart"></div>
                  <div class="order-completion-screen-content-body"></div>
                  <button style="width: 90%;" class="btn">Finalizar Compra</button>
+                 <div class="close-cart" onclick="fechaTelaItemCart()"><i class="fa-solid fa-xmark"></i></div>
              </div>
          </div>
 
@@ -137,19 +139,18 @@
                          <div class="carousel-inner"></div>
                      </div>
                  </div>
-             </div>
 
-             <div class="container">
-                 <div class="purchase-screen">
-                     <div class="container">
+                 <div class="container">
+                     <div class="purchase-screen">
+                         <div class="container">
 
+                         </div>
                      </div>
                  </div>
+
              </div>
 
-         </div>
-
-         <div class="who-we-are"></div>
+             <div class="who-we-are"></div>
 
      </main>
 
