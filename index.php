@@ -65,6 +65,17 @@
                  <div class="close-cart" onclick="fechaTelaItemCart()"><i class="fa-solid fa-xmark"></i></div>
              </div>
          </div>
+         <div class="order-completion-screen-content-display-exclude" style="display: none;">
+             <div class="order-completion-screen-content-exclude">
+                 <h4>Tens certeza que deseja excluir o item:</h4>
+                 <div class="order-completion-screen-content-exclude-body"></div>
+                 <h4>De seu pedido?</h4>
+                 <div class="order-completion-screen-content-display-exclude-buttons">
+                    <button id="btn-confirm-exclude" class="btn btn-success">Sim</button>
+                    <button id="btn-delete-exclude" class="btn btn-danger">Não</button>
+                 </div>
+             </div>
+         </div>
 
          <div class="container header">
              <div class="header-logo">

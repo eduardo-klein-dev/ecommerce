@@ -5,6 +5,7 @@ idProdutoInserido = valor;
 var idProduto = 0;
 var qtdeProduto = 0;
 var cart = [];
+var estoque = 0;
 
 const button = document.querySelector('#button-products');
 const products = document.querySelector('.list-products');
@@ -13,6 +14,7 @@ const purchase_screen = document.querySelector('.purchase-screen');
 const carrinho = document.querySelector('.popup-cart');
 const telaComprasVazia = document.querySelector('.order-completion-screen-empty-display');
 const telaComprasItens = document.querySelector('.order-completion-screen-content-display');
+const telaComprasExclusão = document.querySelector('.order-completion-screen-content-display-exclude');
 const fechaTelaItem = document.querySelector('.close-cart');
 
 // Eventos de Click:
@@ -128,8 +130,10 @@ function ScrenBuyItemPromo(id) {
                     if (qtde > 1) {
                         removeNumberQtde();
                         number_marker.innerHTML = qtde;
+                        estoque = qtde;
                     } else {
                         qtde = qtde;
+                        estoque = qtde;
                     }
                 });
 
@@ -208,7 +212,7 @@ function ScrenCartBody(valor) {
             var desconto = 0;
 
             for (i = 0; i < Object.keys(json).length; i++) {
-                html += '<div class="order-completion-screen-content-body-item"><div class="order-completion-screen-content-body-item-img"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="order-completion-screen-content-body-item-text"><p>' + json[i].apelido + '</p><p style="font-style: italic;">Quantidade: ' + json[i].estoque + '</p><div id="price-discont"><p style="font-style: italic;">Valor Original Item:<p style="margin-left: 8px;font-style: italic;text-decoration: line-through;">R$ ' + json[i].valor + '</p></p><p style="margin-left: 8px;color: red;font-style: italic;">-' + json[i].desconto + '%</p></div><div id="total-price"><p style="font-style: italic;">Valor Total Item: </p><div class="total-price-discont-' + json[i].id + '" style="margin-left: 8px;font-style: italic;"></div></div></div><div class="order-completion-screen-content-body-item-icon"><i class="fa-solid fa-trash-can"></i></div></div>';
+                html += '<div class="order-completion-screen-content-body-item"><div class="order-completion-screen-content-body-item-img"><img src="public/imgs/produtos/' + json[i].id + '.png" alt=""></div><div class="order-completion-screen-content-body-item-text"><p>' + json[i].apelido + '</p><p style="font-style: italic;">Quantidade: ' + json[i].estoque + '</p><div id="price-discont"><p style="font-style: italic;">Valor Original Item:<p style="margin-left: 8px;font-style: italic;text-decoration: line-through;">R$ ' + json[i].valor + '</p></p><p style="margin-left: 8px;color: red;font-style: italic;">-' + json[i].desconto + '%</p></div><div id="total-price"><p style="font-style: italic;">Valor Total Item: </p><div class="total-price-discont-' + json[i].id + '" style="margin-left: 8px;font-style: italic;"></div></div></div><div class="order-completion-screen-content-body-item-icon"><i id="btn-trash-' + json[i].id + '" class="fa-solid fa-trash-can"></i></div></div>';
                 document.querySelector('.order-completion-screen-content-body').innerHTML = html;
             };
 
@@ -224,6 +228,35 @@ function ScrenCartBody(valor) {
 
             }
 
+            for (i in json) {
+                let id = json[i].id;
+                let apelido = json[i].apelido;
+                let estoque = json[i].estoque;
+
+                let btnTrash = document.querySelector('#btn-trash-' + id);
+
+                btnTrash.addEventListener('click', () => {
+
+                    telaComprasExclusão.style.display = 'block';
+                    var NewHtml = `<h5>${apelido}</h5><img src="public/imgs/produtos/${id}.png" alt=""><h5><em>Quantidade: ${estoque}</em></h5>`
+                    document.querySelector('.order-completion-screen-content-exclude-body').innerHTML = NewHtml;
+
+                    btnSim = document.querySelector('#btn-confirm-exclude');
+                    btnNao = document.querySelector('#btn-delete-exclude');
+
+                    btnSim.addEventListener('click', () => {
+                        removeItensPedido(idProdutoInserido, id);
+                        telaComprasExclusão.style.display = 'none';
+                        telaComprasItens.style.display = 'none';
+                        setTimeout(() => {
+                            document.location.reload();
+                        }, 500);
+                    });
+                    btnNao.addEventListener('click', () => {
+                        telaComprasExclusão.style.display = 'none';
+                    });
+                });
+            }
         }
     });
 };
@@ -241,7 +274,6 @@ function verificaCarrinho(idProdutoInserido) {
         })
         .then(data => {
             var quantosItens = Object.keys(data).length;
-            console.log(quantosItens)
 
             if (quantosItens > 0) {
                 carrinhoCheio.style.display = 'block';
@@ -260,11 +292,7 @@ function verificaCarrinhoPopUp(idProdutoInserido) {
             return response.json();
         })
         .then(data => {
-            console.log(idProdutoInserido)
-            console.log("CHEGOU AQUI BB!")
-            console.log(data.length)
             var quantosItens = Object.keys(data).length;
-            console.log(quantosItens)
             if (quantosItens > 0) {
                 carrinho.style.display = 'block';
             } else {
@@ -272,3 +300,16 @@ function verificaCarrinhoPopUp(idProdutoInserido) {
             };
         });
 };
+
+function removeItensPedido(idProdutoInserido, idProduto) {
+    console.log(idProdutoInserido);
+    console.log(idProduto);
+    console.log('http://localhost:8000/api/ecommerce/removeitempedido/' + idProdutoInserido + '/' + idProduto)
+    fetch('http://localhost:8000/api/ecommerce/removeitempedido/' + idProdutoInserido + '/' + idProduto, {
+        method: 'POST'
+    })
+        .then(response => {
+            if (response.ok) {
+            } else { }
+        })
+}

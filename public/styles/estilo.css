@@ -39,7 +39,8 @@ body {
 /* Tela de Finalização de compra: */
 
 .order-completion-screen-empty,
-.order-completion-screen-content {
+.order-completion-screen-content,
+.order-completion-screen-content-exclude {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,6 +141,29 @@ body {
     padding-top: 40px;
     margin-left: 20px;
     cursor: pointer;
+}
+
+.order-completion-screen-content-exclude-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-completion-screen-content-exclude-body h5:first-child {
+    margin-top: 10px;
+}
+
+.order-completion-screen-content-exclude-body img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.order-completion-screen-content-display-exclude-buttons button {
+    margin-top: 10px;
+    width: 100px;
 }
 
 .login-cart {

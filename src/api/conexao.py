@@ -106,3 +106,13 @@ def ConsultaItensCart(idProdutoInserido):
     print(converter)
     con.close()
     return converter
+
+def removeItensPedido(idProdutoInserido, idProduto):
+    val = (idProdutoInserido, idProduto)
+    con = mysql.connector.connect(host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "delete from log_itens_pedidos where id_pedido = %s and id_produto = %s"
+    c.execute(sql, val)
+    con.commit()
+    con.close()
+    return 'Fim!'
