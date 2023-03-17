@@ -19,7 +19,7 @@ body {
 
 .cart {
     font-size: 25px;
-    margin-top: 5px;
+    margin-top: 0px;
     cursor: pointer;
 }
 
@@ -30,8 +30,8 @@ body {
     background-color: deepskyblue;
     border-radius: 10px;
     position: absolute;
-    right: 40px;
-    top: 70px
+    right: 60px;
+    top: 66px
 }
 
 /* Header: */
@@ -61,7 +61,7 @@ body {
     padding-right: 20px;
     border-radius: 20px;
     width: 800px;
-    height: 500px;
+    height: 550px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -76,6 +76,19 @@ body {
     border-radius: 20px;
     width: 800px;
     height: 570px;
+}
+
+#text-confirm-login {
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    background-color: red; 
+    color: #FFF;
+    position: absolute; 
+    top: 600px; 
+    width: 800px; 
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .screen-registration-body form input{
@@ -162,12 +175,20 @@ body {
     width: 100px;
 }
 
-.close-screen-login,
+.close-screen-login {
+    font-size: 26px;
+    position: absolute;
+    color: #FFF;
+    top: 90px;
+    right: 390px;
+    cursor: pointer;
+}
+
 .close-screen-registration {
     font-size: 26px;
     position: absolute;
     color: #FFF;
-    top: 120px;
+    top: 80px;
     right: 390px;
     cursor: pointer;
 }
@@ -314,6 +335,8 @@ body {
 }
 
 .login-cart-body {
+    align-items: center;
+    justify-content: center;
     display: flex;
     flex-direction: row;
     margin-top: -20px;

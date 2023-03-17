@@ -77,11 +77,12 @@ def insereItensPedido(idProdutoInserido, idProduto, qtdeProduto):
 
 def ConsultaItensCart(idProdutoInserido):
     val = str(idProdutoInserido)
-    con = mysql.connector.connect(host="localhost", user="root", password="", database="ecommerce")
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
     c = con.cursor()
     sql = "select pr.id_produto, prm.nome_produto, pr.valor_produto, prm.perc_desconto, log.qt_produto, log.id_pedido from promocoes prm join log_itens_pedidos log on prm.id_produto = log.id_produto join produtos pr on pr.id_produto = prm.id_produto where log.id_pedido = %s"
     c.execute(sql, (val,))
-    #print(sql + val)
+    # print(sql + val)
 
     lista = dict()
     contador = 0
@@ -107,12 +108,42 @@ def ConsultaItensCart(idProdutoInserido):
     con.close()
     return converter
 
+
 def removeItensPedido(idProdutoInserido, idProduto):
     val = (idProdutoInserido, idProduto)
-    con = mysql.connector.connect(host="localhost", user="root", password="", database="ecommerce")
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
     c = con.cursor()
     sql = "delete from log_itens_pedidos where id_pedido = %s and id_produto = %s"
     c.execute(sql, val)
     con.commit()
     con.close()
     return 'Fim!'
+
+
+def validaLogin(email, senha):
+    val = (email, senha)
+    con = mysql.connector.connect(host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "select * from usuarios where email = %s and senha = md5(%s)"
+    c.execute(sql, val)
+    lista = dict()
+    contador = 0
+
+    for i in c.fetchall():
+        lista[contador] = {
+            "id": i[0],
+            "nome": i[1],
+            "email": i[2],
+            "senha": i[3],
+            "rua": i[4],
+            "bairro": i[5],
+            "cidade": i[6],
+            "estado": i[7]
+        }
+        contador = contador + 1
+
+    converter = json.dumps(lista)
+    con.close()
+
+    return converter

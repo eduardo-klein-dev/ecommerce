@@ -26,5 +26,9 @@ def svcConsultaItensCart(idProdutoInserido):
 def svcRemoveProdutosPedido(idProdutoInserido, idProduto):
     return svc.removeItensPedido(idProdutoInserido, format(idProduto))
 
+@app.route('/api/ecommerce/login/<string:email>/<string:senha>', methods=['GET'])
+def svcValidaLogin(email, senha):
+    return svc.validaLogin(email, senha)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

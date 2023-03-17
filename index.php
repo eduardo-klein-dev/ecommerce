@@ -35,7 +35,9 @@
          <input style="display:none" type="text" id="sessionID" value="<?= $idSession ?>" />
 
          <div class="login-cart">
-             <p>Bem Vindo!</p>
+             <div style="width: 150px;" id="nome-pagina">
+                 <p>Bem Vindo!</p>
+             </div>
              <div class="login-cart-body">
                  <div id="link-entrar" class="login"><u>Entrar</u></div>
                  <div id="link-cadastro" class="cadastro"><u>Cadastrar</u></div>
@@ -61,7 +63,7 @@
                  <h4>Carrinho de compras:</h4>
                  <div class="sublime-cart"></div>
                  <div class="order-completion-screen-content-body"></div>
-                 <button id='checkout_button' style="width: 90%;" class="btn">Finalizar Compra</button>
+                 <button id='checkout_button' onclick="cliqueBotaoEnvia()" style="width: 90%;" class="btn">Finalizar Compra</button>
                  <div class="close-cart" onclick="fechaTelaItemCart()"><i class="fa-solid fa-xmark"></i></div>
              </div>
          </div>
@@ -149,12 +151,12 @@
                          <form>
                              <div class="mb-3">
                                  <label style="margin-left: -370px;" class="form-label">Email:</label>
-                                 <input type="email" class="form-control">
+                                 <input id="login-email" type="email" class="form-control" required>
                                  <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com mais ninguém.</div>
                              </div>
                              <div class="mb-3">
                                  <label style="margin-left: -370px;" class="form-label">Senha:</label>
-                                 <input type="password" class="form-control">
+                                 <input id="login-senha" type="password" class="form-control" required>
                              </div>
                              <div class="mb-3 form-check">
                                  <input type="checkbox" class="form-check-input" id="checkbox-lembre-de-mim">
@@ -163,10 +165,13 @@
                              <div class="mb-3" style="margin-top: -10px;">
                                  <label style="margin-left: -210px;">Não tenho login, <u id="link-cadastrar">cadastrar-se</u></label>
                              </div>
-                             <button type="submit" class="btn btn-light">OK</button>
                          </form>
+                         <button id="btn-valida-login" onclick="cliqueBotaoEnvia()" class="btn btn-light">OK</button>
                          <div class="close-screen-login"><i class="fa-solid fa-xmark"></i></div>
                      </div>
+                 </div>
+                 <div id="text-confirm-login" style="display: none;">
+                     <label>Usuário ou Senha Inválidos! Revise as informações inseridas!</label>
                  </div>
              </div>
          </div>
