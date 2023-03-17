@@ -36,6 +36,142 @@ body {
 
 /* Header: */
 
+/* Tela de Login: */
+
+.screen-login,
+.registration-screen {
+    z-index: 99;
+    position: absolute;
+    top: 0px;
+}
+
+.screen-login-bottom,
+.screen-registration-bottom {
+    background-color: rgba(225, 225, 225, 0.7);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-login-body {
+    background-color: #141414;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    width: 800px;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-registration-body {
+    background-color: #141414;
+    padding: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 20px;
+    width: 800px;
+    height: 570px;
+}
+
+.screen-registration-body form input{
+    margin-bottom: 5px;
+}
+
+.screen-registration-body form button{
+    width: 100px;
+}
+
+#email-senha,
+#rua-bairro,
+#cidade-estado {
+    display: flex;
+    flex-direction: row;
+}
+
+#email-senha input,
+#rua-bairro input,
+#input-cidade,
+#cidade-estado select{
+    width: 335px;
+}
+
+#input-email,
+#input-rua,
+#input-cidade {
+    margin-right: 30px;
+}
+
+.screen-login-body-right {
+    width: 300px;
+    margin-right: 20px;
+    border-radius: 20px;
+    height: 400px;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-registration-body-content {
+    color: #FFF;
+    align-items: start;
+    justify-content: start;
+}
+
+.screen-login-body-right img {
+    width: 130%;
+}
+
+.screen-login-body-left {
+    text-align: center;
+    height: 450px;
+    width: 500px;
+    border-left: 2px solid #ffffff;
+    padding: 20px;
+    color: #FFF;
+}
+
+.screen-login-body-left form {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+#link-cadastrar,
+#link-login,
+#link-entrar,
+#link-cadastro {
+    cursor: pointer;
+}
+
+.screen-login-body-left button,
+.screen-registration-body-left button {
+    width: 100px;
+}
+
+.screen-login-body-left button:hover,
+.screen-registration-body button:hover {
+    color: #FFF;
+    background-color: #141414;
+    border: 1px solid #FFF;
+    width: 100px;
+}
+
+.close-screen-login,
+.close-screen-registration {
+    font-size: 26px;
+    position: absolute;
+    color: #FFF;
+    top: 120px;
+    right: 390px;
+    cursor: pointer;
+}
+
 /* Tela de Finalização de compra: */
 
 .order-completion-screen-empty,

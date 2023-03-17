@@ -25,9 +25,14 @@ button.addEventListener('click', () => {
         products.style.display = 'block';
         start.classList.remove('active');
         button.classList.add('active');
+        if (telaComprasItens.style.display == 'block' || telaComprasExclusão.style.display == 'block' || telaComprasVazia.style.display == 'block'){
+            telaComprasItens.style.display = 'none';
+            telaComprasExclusão.style.display = 'none';
+            telaComprasVazia.style.display = 'none';
+        };
     }
     else {
-        products.style.display = 'none';
+        products.style.display =  'none';
         start.classList.add('active');
         button.classList.remove('active');
     }

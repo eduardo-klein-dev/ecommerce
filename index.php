@@ -37,8 +37,8 @@
          <div class="login-cart">
              <p>Bem Vindo!</p>
              <div class="login-cart-body">
-                 <div class="login"><a href="">Entrar</a></div>
-                 <div class="cadastro"><a href="">Cadastrar</a></div>
+                 <div id="link-entrar" class="login"><u>Entrar</u></div>
+                 <div id="link-cadastro" class="cadastro"><u>Cadastrar</u></div>
              </div>
              <div class="cart">
                  <i class="fa-solid fa-cart-shopping"></i>
@@ -61,7 +61,7 @@
                  <h4>Carrinho de compras:</h4>
                  <div class="sublime-cart"></div>
                  <div class="order-completion-screen-content-body"></div>
-                 <button style="width: 90%;" class="btn">Finalizar Compra</button>
+                 <button id='checkout_button' style="width: 90%;" class="btn">Finalizar Compra</button>
                  <div class="close-cart" onclick="fechaTelaItemCart()"><i class="fa-solid fa-xmark"></i></div>
              </div>
          </div>
@@ -71,8 +71,8 @@
                  <div class="order-completion-screen-content-exclude-body"></div>
                  <h4>De seu pedido?</h4>
                  <div class="order-completion-screen-content-display-exclude-buttons">
-                    <button id="btn-confirm-exclude" class="btn btn-success">Sim</button>
-                    <button id="btn-delete-exclude" class="btn btn-danger">Não</button>
+                     <button id="btn-confirm-exclude" class="btn btn-success">Sim</button>
+                     <button id="btn-delete-exclude" class="btn btn-danger">Não</button>
                  </div>
              </div>
          </div>
@@ -138,6 +138,127 @@
 
      <main>
 
+         <div class="screen-login" style="display: none;">
+             <div class="screen-login-bottom">
+                 <div class="screen-login-body">
+                     <div class="screen-login-body-right">
+                         <img src="public/imgs/logo-cart.png" alt="">
+                     </div>
+                     <div class="screen-login-body-left">
+                         <h4>Para poder prosseguir com a compra de seus pedidos você precisa estar logado em uma conta</h4>
+                         <form>
+                             <div class="mb-3">
+                                 <label style="margin-left: -370px;" class="form-label">Email:</label>
+                                 <input type="email" class="form-control">
+                                 <div id="emailHelp" class="form-text">Nunca compartilharemos seu e-mail com mais ninguém.</div>
+                             </div>
+                             <div class="mb-3">
+                                 <label style="margin-left: -370px;" class="form-label">Senha:</label>
+                                 <input type="password" class="form-control">
+                             </div>
+                             <div class="mb-3 form-check">
+                                 <input type="checkbox" class="form-check-input" id="checkbox-lembre-de-mim">
+                                 <label style="margin-left: -290px;">Lembre de mim</label>
+                             </div>
+                             <div class="mb-3" style="margin-top: -10px;">
+                                 <label style="margin-left: -210px;">Não tenho login, <u id="link-cadastrar">cadastrar-se</u></label>
+                             </div>
+                             <button type="submit" class="btn btn-light">OK</button>
+                         </form>
+                         <div class="close-screen-login"><i class="fa-solid fa-xmark"></i></div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+         <div class="registration-screen" style="display: none;">
+             <div class="screen-registration-bottom">
+                 <div class="screen-registration-body">
+                     <div class="screen-registration-body-content">
+                         <div style="text-align: center; margin-bottom: 20px;">
+                             <h4><u>Entre com as informações solicitadas para criar seu cadastro:</u></h4>
+                         </div>
+                         <form>
+                             <div>
+                                 <label class="form-label">*Nome Completo:</label>
+                                 <input type="text" class="form-control" required>
+                                 <small class="form-text text-muted mb-2">Ex.: Fulano de Ciclano da Silva</small>
+                             </div>
+                             <div id="email-senha">
+                                 <div id="input-email">
+                                     <label class="form-label mt-2">*Email:</label>
+                                     <input type="email" class="form-control" required>
+                                     <small class="form-text text-muted">Ex.: fulano@gmail.com</small>
+                                 </div>
+                                 <div>
+                                     <label class="form-label mt-2">*Senha:</label>
+                                     <input type="password" class="form-control" required>
+                                     <small class="form-text text-muted mb-2">Ex.: A senha deve ter no mínimo 6 dígitos.</small>
+                                 </div>
+                             </div>
+                             <div id="rua-bairro">
+                                 <div id="input-rua">
+                                     <label class="form-label mt-2">Rua:</label>
+                                     <input type="text" class="form-control">
+                                 </div>
+                                 <div>
+                                     <label class="form-label mt-2">Bairro:</label>
+                                     <input type="text" class="form-control">
+                                 </div>
+                             </div>
+                             <div id="cidade-estado">
+                                 <div id="input-cidade">
+                                     <label class="form-label mt-2">Cidade:</label>
+                                     <input type="text" class="form-control">
+                                 </div>
+                                 <div>
+                                     <label class="form-label mt-2">Estado:</label>
+                                     <select class="form-control">
+                                         <option>Escolha a opção</option>
+                                         <option>Acre</option>
+                                         <option>Alagoas</option>
+                                         <option>Amapá</option>
+                                         <option>Amazonas</option>
+                                         <option>Bahia</option>
+                                         <option>Ceará</option>
+                                         <option>Espírito Santo</option>
+                                         <option>Goiás</option>
+                                         <option>Maranhão</option>
+                                         <option>Mato Grosso</option>
+                                         <option>Mato Grosso do Sul</option>
+                                         <option>Pará</option>
+                                         <option>Paraíba</option>
+                                         <option>Paraná</option>
+                                         <option>Pernambuco</option>
+                                         <option>Piauí</option>
+                                         <option>Rio de Janeiro</option>
+                                         <option>Rio Grande do Norte</option>
+                                         <option>Rio Grande do Sul</option>
+                                         <option>Rondônia</option>
+                                         <option>Roraima</option>
+                                         <option>Santa Catarina</option>
+                                         <option>São Paulo</option>
+                                         <option>Sergipe</option>
+                                         <option>Tocantins</option>
+                                     </select>
+                                 </div>
+                             </div>
+                             <div class="mt-2" style="margin-top: -10px;color: rgb(250, 0, 0);">
+                                 <label>*Campos Obrigatórios</label>
+                             </div>
+                             <div class="mt-1" style="margin-top: -10px;">
+                                 <label>Já tenho login, <u id="link-login">entrar</u></label>
+                             </div>
+                             <div style="text-align: center;">
+                                 <button type="submit" class="btn btn-light">Enviar</button>
+                             </div>
+                         </form>
+                         <div class="close-screen-registration"><i class="fa-solid fa-xmark"></i></div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
          <div class="promotions">
 
              <div class="promotions-opacity">
@@ -171,6 +292,7 @@
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
      <script src="public/js/promocoes.js" defer></script>
      <script src="public/js/scripts.js" defer></script>
+     <script src="public/js/login.js" defer></script>
 
  </body>
 
