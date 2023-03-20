@@ -500,7 +500,7 @@ header {
 
 .list-products {
     display: none;
-    position: absolute;
+    /* position: absolute; */
     z-index: 99;
     right: 370px;
     top: 85px;
@@ -703,6 +703,37 @@ header {
 
 .qtde-item {
     margin-bottom: -20px;
+}
+
+/* Cookie: */
+
+.cookie {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    background-color: #141414;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 30px;
+    z-index: 100;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.cookie-body {
+    color: #FFF;
+}
+
+.cookie-body label {
+    font-size: 20px;
+}
+
+#btn-aceita-cookie:hover {
+    background-color: #141414;
+    border: 1px solid #FFF;
+    color: #FFF;
 }
 
 /* Who We Are: */

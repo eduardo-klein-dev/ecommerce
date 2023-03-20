@@ -123,7 +123,8 @@ def removeItensPedido(idProdutoInserido, idProduto):
 
 def validaLogin(email, senha):
     val = (email, senha)
-    con = mysql.connector.connect(host="localhost", user="root", password="", database="ecommerce")
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
     c = con.cursor()
     sql = "select * from usuarios where email = %s and senha = md5(%s)"
     c.execute(sql, val)
@@ -147,3 +148,63 @@ def validaLogin(email, senha):
     con.close()
 
     return converter
+
+
+def enviaCadastro(nome, email, senha, rua, bairro, cidade, estado):
+    val = (nome, email, senha, rua, bairro, cidade, estado)
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "insert into usuarios (nome, email, senha, rua, bairro, cidade, estado) values (%s,%s,md5(%s),%s,%s,%s,%s)"
+    c.execute(sql, val)
+    con.commit()
+    con.close()
+    return 'DEU CERTO!'
+
+
+def criaCookie(session):
+    val = str(session)
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "insert into valida_cookie(session) values (%s)"
+    c.execute(sql, (val,))
+    con.commit()
+    con.close()
+    return 'COOKIE CRIADO!'
+
+
+def consultaCookie(session):
+    val = str(session)
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "select * from valida_cookie where session = %s"
+    c.execute(sql, (val,))
+
+    lista = dict()
+    contador = 0
+
+    for i in c.fetchall():
+        lista[contador] = {
+            "id": i[0],
+            "session": i[1],
+            "status": i[2]
+        }
+        contador = contador + 1
+
+    converter = json.dumps(lista)
+    con.close()
+
+    return converter
+
+def alteraCookie(session):
+    val = str(session)
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "update valida_cookie set status = 'SIM' where session = %s"
+    c.execute(sql, (val,))
+    con.commit()
+    con.close()
+    return 'COOKIE ALTERADO!'

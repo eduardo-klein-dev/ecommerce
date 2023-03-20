@@ -29,14 +29,23 @@
 
  </head>
 
- <body onload="verificaCarrinhoPopUp(idProdutoInserido)">
+ <body onload="verificaCarrinhoPopUp(idProdutoInserido), consultaCookieStatus(session), consultaCookie(session)">
+
+     <div class="cookie" style="display: none;">
+         <div class="cookie-body">
+             <h4><u><i class="fa-solid fa-cookie"></i> Este site usa Cookies</u></h4>
+             <label>Nós armazenamos dados temporiamente para melhorar a sua experiência de navegação em nosso site. Ao utilizar nossos serviços, você concorda com isso.</label>
+             <br>
+             <button onclick="cliqueAlteraCookie()" id="btn-aceita-cookie" type="button" class="btn btn-light mt-3">Aceitar</button>
+         </div>
+     </div>
 
      <header>
          <input style="display:none" type="text" id="sessionID" value="<?= $idSession ?>" />
 
          <div class="login-cart">
              <div style="width: 150px;" id="nome-pagina">
-                 <p>Bem Vindo!</p>
+                 <p id="user-info">Bem Vindo!</p>
              </div>
              <div class="login-cart-body">
                  <div id="link-entrar" class="login"><u>Entrar</u></div>
@@ -148,7 +157,7 @@
                      </div>
                      <div class="screen-login-body-left">
                          <h4>Para poder prosseguir com a compra de seus pedidos você precisa estar logado em uma conta</h4>
-                         <form>
+                         <form id="form-login">
                              <div class="mb-3">
                                  <label style="margin-left: -370px;" class="form-label">Email:</label>
                                  <input id="login-email" type="email" class="form-control" required>
@@ -165,8 +174,8 @@
                              <div class="mb-3" style="margin-top: -10px;">
                                  <label style="margin-left: -210px;">Não tenho login, <u id="link-cadastrar">cadastrar-se</u></label>
                              </div>
+                             <button id="btn-valida-login" onclick="cliqueValidaLogin()" class="btn btn-light">OK</button>
                          </form>
-                         <button id="btn-valida-login" onclick="cliqueBotaoEnvia()" class="btn btn-light">OK</button>
                          <div class="close-screen-login"><i class="fa-solid fa-xmark"></i></div>
                      </div>
                  </div>
@@ -183,42 +192,42 @@
                          <div style="text-align: center; margin-bottom: 20px;">
                              <h4><u>Entre com as informações solicitadas para criar seu cadastro:</u></h4>
                          </div>
-                         <form>
+                         <form id="form-cadastro">
                              <div>
                                  <label class="form-label">*Nome Completo:</label>
-                                 <input type="text" class="form-control" required>
+                                 <input id="input-nome-completo" type="text" class="form-control" required>
                                  <small class="form-text text-muted mb-2">Ex.: Fulano de Ciclano da Silva</small>
                              </div>
                              <div id="email-senha">
                                  <div id="input-email">
                                      <label class="form-label mt-2">*Email:</label>
-                                     <input type="email" class="form-control" required>
+                                     <input id="input-campo-email" type="email" class="form-control" required>
                                      <small class="form-text text-muted">Ex.: fulano@gmail.com</small>
                                  </div>
                                  <div>
                                      <label class="form-label mt-2">*Senha:</label>
-                                     <input type="password" class="form-control" required>
+                                     <input id="input-senha" type="password" class="form-control" required>
                                      <small class="form-text text-muted mb-2">Ex.: A senha deve ter no mínimo 6 dígitos.</small>
                                  </div>
                              </div>
                              <div id="rua-bairro">
                                  <div id="input-rua">
                                      <label class="form-label mt-2">Rua:</label>
-                                     <input type="text" class="form-control">
+                                     <input id="input-campo-rua" type="text" class="form-control">
                                  </div>
                                  <div>
                                      <label class="form-label mt-2">Bairro:</label>
-                                     <input type="text" class="form-control">
+                                     <input id="input-campo-bairro" type="text" class="form-control">
                                  </div>
                              </div>
                              <div id="cidade-estado">
                                  <div id="input-cidade">
                                      <label class="form-label mt-2">Cidade:</label>
-                                     <input type="text" class="form-control">
+                                     <input id="input-campo-cidade" type="text" class="form-control">
                                  </div>
                                  <div>
                                      <label class="form-label mt-2">Estado:</label>
-                                     <select class="form-control">
+                                     <select id="input-campo-estado" class="form-control">
                                          <option>Escolha a opção</option>
                                          <option>Acre</option>
                                          <option>Alagoas</option>
@@ -255,7 +264,7 @@
                                  <label>Já tenho login, <u id="link-login">entrar</u></label>
                              </div>
                              <div style="text-align: center;">
-                                 <button type="submit" class="btn btn-light">Enviar</button>
+                                 <button type="submit" onclick="cliqueEnviaCadastro()" class="btn btn-light">Enviar</button>
                              </div>
                          </form>
                          <div class="close-screen-registration"><i class="fa-solid fa-xmark"></i></div>
@@ -291,6 +300,56 @@
 
      </main>
 
+     <script>
+         function consultaCookieStatus(session) {
+             $.ajax({
+                 url: 'http://localhost:8000/api/ecommerce/consultacookie/' + session,
+                 type: 'GET',
+                 dataType: 'json',
+
+                 beforeSend: function() {
+                     $('.purchase-screen').html('<div style="margin-top:20px" class="carregando col-md-12">Carregando...</div>');
+                 },
+
+                 success: function(json) {
+
+                     for (var i in json) {
+
+                         if (json[i].status == 'SIM') {
+                             telaCookie.style.display = 'none'
+                         } else {
+                             telaCookie.style.display = 'block'
+                         }
+                     }
+
+                 }
+             })
+         };
+
+
+         function getCookie(name) {
+             var value = "; " + document.cookie;
+             var parts = value.split("; " + name + "=");
+             if (parts.length == 2) {
+                 return parts.pop().split(";").shift();
+             }
+         }
+         var nome = getCookie("Login");
+         if (nome) {
+             document.getElementById("user-info").innerHTML = "Olá, " + nome + "!";
+             var c = document.querySelector('.login-cart-body');
+             var cart = document.querySelector('.cart');
+             var popup = document.querySelector('.popup-cart');
+
+             c.innerHTML = '';
+             cart.style.marginTop = '10px';
+             popup.style.marginTop = '10px'
+
+         } else {
+             document.getElementById("user-info").innerHTML = "Bem-Vindo!";
+         }
+     </script>
+
      <!-- Links JavaScript: -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" defer integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -298,6 +357,7 @@
      <script src="public/js/promocoes.js" defer></script>
      <script src="public/js/scripts.js" defer></script>
      <script src="public/js/login.js" defer></script>
+     <script src="public/js/cookie.js" defer></script>
 
  </body>
 
