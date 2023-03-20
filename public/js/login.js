@@ -155,7 +155,7 @@ function cliqueBotaoEnvia() {
     }
     var nome = getCookie("Login");
     if (nome) {
-        console.log('Pedido CONFIRMADO!')
+        window.location = "finalizarpedido.php";
     } else {
         telaLogin.style.display = 'block';
         telaComprasItens.style.display = 'none';

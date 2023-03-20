@@ -8,6 +8,7 @@ var cart = [];
 var estoque = 0;
 
 const button = document.querySelector('#button-products');
+const buttonInicio = document.querySelector('#button-start');
 const products = document.querySelector('.list-products');
 const start = document.querySelector('#button-start');
 const purchase_screen = document.querySelector('.purchase-screen');
@@ -19,6 +20,12 @@ const fechaTelaItem = document.querySelector('.close-cart');
 
 // Eventos de Click:
 products.style.display = 'none';
+
+buttonInicio.addEventListener('click', () => {
+    telaComprasVazia.style.display = 'none';
+    telaComprasItens.style.display = 'none';
+    telaComprasExclusão.style.display = 'none';
+});
 
 button.addEventListener('click', () => {
     if (products.style.display == 'none') {

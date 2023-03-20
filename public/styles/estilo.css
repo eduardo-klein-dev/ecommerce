@@ -500,7 +500,7 @@ header {
 
 .list-products {
     display: none;
-    /* position: absolute; */
+    position: absolute;
     z-index: 99;
     right: 370px;
     top: 85px;
