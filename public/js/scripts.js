@@ -12,7 +12,7 @@ const buttonInicio = document.querySelector('#button-start');
 const products = document.querySelector('.list-products');
 const start = document.querySelector('#button-start');
 const purchase_screen = document.querySelector('.purchase-screen');
-const carrinho = document.querySelector('.popup-cart');
+const popUpCarrinho = document.querySelector('.popup-cart');
 const telaComprasVazia = document.querySelector('.order-completion-screen-empty-display');
 const telaComprasItens = document.querySelector('.order-completion-screen-content-display');
 const telaComprasExclusão = document.querySelector('.order-completion-screen-content-display-exclude');
@@ -162,7 +162,7 @@ function ScrenBuyItemPromo(id) {
                     });
 
                     purchase_screen.style.display = 'none';
-                    carrinho.style.display = 'block';
+                    popUpCarrinho.style.display = 'block';
                     addItemPedido();
 
                 });
@@ -306,9 +306,9 @@ function verificaCarrinhoPopUp(idProdutoInserido) {
         .then(data => {
             var quantosItens = Object.keys(data).length;
             if (quantosItens > 0) {
-                carrinho.style.display = 'block';
+                popUpCarrinho.style.display = 'block';
             } else {
-                carrinho.style.display = 'none';
+                popUpCarrinho.style.display = 'none';
             };
         });
 };

@@ -46,5 +46,9 @@ def svcConsultaCookie(session):
 def svcAlteraCookie(session):
     return svc.alteraCookie(session)
 
+@app.route('/api/ecommerce/finalizapedido/<string:session>', methods=['GET'])
+def svcFinalizaPedido(session):
+    return svc.finalizaPedido(session)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

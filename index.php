@@ -274,7 +274,6 @@
          </div>
 
          <div class="promotions">
-
              <div class="promotions-opacity">
                  <div class="container promotions-body">
                      <div class="tittle-promotions">
@@ -288,15 +287,29 @@
 
                  <div class="container">
                      <div class="purchase-screen">
-                         <div class="container">
-
-                         </div>
+                         <div class="container"></div>
                      </div>
                  </div>
-
              </div>
+         </div>
 
-             <div class="who-we-are"></div>
+         <div class="final-order" style="display: none;">
+             <div class="final-order-opacity">
+                 <div class="container">
+                     <div class="final-order-body">
+                         <div class="tittle-final-order">
+                             <h2>Finalizar Pedido:</h2>
+                         </div>
+                         <div class="line-tittle"></div>
+                         <div id="seus-itens"><strong>Seus Itens:</strong></div>
+                         <div class="list-products-final-order"></div>
+                         <div id="total-valor-itens"><strong>Valor Total: </strong></div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+
 
      </main>
 
@@ -358,6 +371,7 @@
      <script src="public/js/scripts.js" defer></script>
      <script src="public/js/login.js" defer></script>
      <script src="public/js/cookie.js" defer></script>
+     <script src="public/js/finalizapedido.js" defer></script>
 
  </body>
 

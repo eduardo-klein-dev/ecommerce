@@ -198,6 +198,7 @@ def consultaCookie(session):
 
     return converter
 
+
 def alteraCookie(session):
     val = str(session)
     con = mysql.connector.connect(
@@ -208,3 +209,33 @@ def alteraCookie(session):
     con.commit()
     con.close()
     return 'COOKIE ALTERADO!'
+
+
+def finalizaPedido(session):
+    val = str(session)
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "SELECT log.id_pedido, log.id_produto, prd.nome_produto, prd.serial_produto, frn.nome_fornecedor, log.qt_produto, nvl(prm.perc_desconto,0) perc_desconto, prd.valor_produto FROM promocoes prm RIGHT JOIN produtos prd ON prd.id_produto = prm.id_produto JOIN log_itens_pedidos log ON log.id_produto = prd.id_produto JOIN fornecedor frn ON frn.id_fornecedor = prd.id_fornecedor WHERE log.id_pedido = %s"
+    c.execute(sql, (val,))
+
+    lista = dict()
+    contador = 0
+
+    for i in c.fetchall():
+        lista[contador] = {
+            "id_pedido": i[0],
+            "id_produto": i[1],
+            "nome_produto": i[2],
+            "serial_produto": i[3],
+            "nome_fornecedor": i[4],
+            "qt_produto": i[5],
+            "perc_desconto": i[6],
+            "valor_produto": i[7]
+        }
+        contador = contador + 1
+
+    converter = json.dumps(lista)
+    con.close()
+
+    return converter

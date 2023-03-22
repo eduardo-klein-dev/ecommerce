@@ -144,20 +144,3 @@ function cliqueEnviaCadastro() {
 
     telaCadastro.style.display = 'none';
 };
-
-function cliqueBotaoEnvia() {
-    function getCookie(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-        if (parts.length == 2) {
-            return parts.pop().split(";").shift();
-        }
-    }
-    var nome = getCookie("Login");
-    if (nome) {
-        window.location = "finalizarpedido.php";
-    } else {
-        telaLogin.style.display = 'block';
-        telaComprasItens.style.display = 'none';
-    }
-};
