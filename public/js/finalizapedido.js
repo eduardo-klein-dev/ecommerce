@@ -102,3 +102,52 @@ function finalizaPedido(session) {
         }
     });
 };
+
+// Funções de clique (métodos de pagamento):
+
+const metodosPagamento = document.querySelector('.tittle-final-order-right-body');
+const tituloPagamento = document.querySelector('#titulo-pagamentos');
+const linhaPagamento = document.querySelector('.line-tittle-payments');
+
+// Métodos de Pagamento:
+const metodoCartao = document.querySelector('#method-card');
+const metodoCartaoDebito = document.querySelector('#method-card-debit');
+const cartaoCredito = document.querySelector('#payment-option-1');
+const cartaoDebito = document.querySelector('#payment-option-2');
+const pix = document.querySelector('#payment-option-3');
+const boleto = document.querySelector('#payment-option-4');
+const carteiraDigital = document.querySelector('#payment-option-5');
+
+// Fechar Telas:
+const fechaCartaoCredito = document.querySelector('#close-cart-payment');
+const fechaCartaoDebito = document.querySelector('#close-cart-debit-payment');
+
+cartaoCredito.addEventListener('click', () => {
+    metodosPagamento.style.display = 'none';
+    tituloPagamento.style.display = 'none';
+    linhaPagamento.style.display = 'none';
+    metodoCartao.style.display = 'flex';
+    metodoCartao.style.width = '100%';
+});
+
+fechaCartaoCredito.addEventListener('click', () => {
+    metodoCartao.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+});
+
+cartaoDebito.addEventListener('click', () => {
+    metodosPagamento.style.display = 'none';
+    tituloPagamento.style.display = 'none';
+    linhaPagamento.style.display = 'none';
+    metodoCartaoDebito.style.display = 'flex';
+    metodoCartaoDebito.style.width = '100%';
+});
+
+fechaCartaoDebito.addEventListener('click', () => {
+    metodoCartaoDebito.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+});

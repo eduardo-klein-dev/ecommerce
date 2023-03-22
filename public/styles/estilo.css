@@ -8,9 +8,22 @@ body {
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(232, 234, 233);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #141414;
+}
+
 /* Configs Globals: */
 
-.line-tittle {
+.line-tittle,
+.line-tittle-payments {
     background-color: #141414;
     width: 80px;
     height: 5px;
@@ -739,32 +752,49 @@ header {
 
 .final-order {
     background-image: url("../../public/imgs/background-gray.jpg");
-    height: 100vh;
+    height: 100%;
 }
 
 .final-order-opacity {
     background-color: rgba(255, 255, 2555, 0.6);
-    height: 100vh;
+    height: 100%;
 }
 
 .final-order-body {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.tittle-final-order {
+.final-order-body-left {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 60%;
+}
+
+.final-order-body-right,
+.final-order-body-right-card {
+    width: 40%;
+    text-align: end;
+    align-items: end;
+    display: flex;
+    flex-direction: column;
+}
+
+.tittle-final-order-left {
     padding-top: 30px;
+}
+
+.tittle-final-order-right {
+    padding-top: 80px;
 }
 
 .product-final-order {
     display: flex;
-    width: 60%;
     flex-direction: row;
 }
 
 #seus-itens,
 #total-valor-itens {
-    width: 60%;
     padding: 2px;
     text-align: center;
     font-size: 18px;
@@ -794,7 +824,7 @@ header {
     height: 130px;
 }
 
-.product-final-order-left img{
+.product-final-order-left img {
     width: 100%;
 }
 
@@ -811,4 +841,210 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.tittle-final-order-right-body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 80%;
+    margin-top: 30px;
+}
+
+.tittle-final-order-right-body-card {
+    text-align: start;
+    width: 80%;
+    margin-top: 30px;
+    background-color: #141414;
+    color: #FFF;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.tittle-final-order-right-body-card input {
+    margin-bottom: 20px;
+}
+
+.payment-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #141414;
+}
+
+#payment-option-1 {
+    grid-column: 1/3;
+}
+
+#payment-option-2 {
+    grid-column: 3/5;
+}
+
+#payment-option-3 {
+    grid-column: 1/3;
+}
+
+#payment-option-4 {
+    grid-column: 3/5;
+}
+
+#payment-option-5 {
+    grid-column: 2/4;
+    margin-bottom: 20px;
+}
+
+.payment-option i {
+    font-size: 50px;
+}
+
+.payment-option h5 {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.final-order-body-left-address-body {
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #141414;
+}
+
+.final-order-body-left-address-body label {
+    color: #FFF;
+    font-size: 20px;
+}
+
+.final-order-body-left-address-body input {
+    margin-bottom: 10px;
+}
+
+#rua-bairro-address,
+#cidade-estado-address {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+#rua-bairro-address div,
+#cidade-estado-address div {
+    width: 48%;
+}
+
+.final-order-address-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.final-order-address-buttons button {
+    width: 300px;
+}
+
+#button-change-address {
+    margin-left: 40px;
+}
+
+#button-confirm-address {
+    margin-right: 40px;
+}
+
+#button-change-address:hover,
+#button-confirm-address:hover {
+    color: #FFF;
+    border: 1px solid #FFF;
+    background-color: #141414;
+}
+
+.line-address {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    background-color: #FFF;
+    border-radius: 10px;
+    height: 5px;
+}
+
+.choice-delivery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.choice-delivery-item {
+    display: flex;
+    flex-direction: row;
+    color: #FFF;
+}
+
+.choice-delivery-item-icon {
+    font-size: 30px;
+}
+
+.choice-delivery-item-descrition {
+    padding: 20px;
+}
+
+.choice-delivery-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.choice-delivery-item-content {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.choice-delivery-item-option {
+    margin-top: 10px;
+}
+
+#vencimento {
+    display: flex;
+    flex-direction: row;
+}
+
+#vencimento select {
+    width: 80px;
+}
+
+#select-ano {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#cvv {
+    flex: 1;
+    margin-top: -27px;
+}
+
+#button-confirm-card,
+#button-confirm-card-debit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#close-cart-payment,
+#close-cart-debit-payment {
+    font-size: 20px;
+    color: #FFF;
+    position: absolute;
+    top: 270px;
+    right: 130px;
+    cursor: pointer;
 }

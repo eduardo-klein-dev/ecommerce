@@ -295,18 +295,242 @@
 
          <div class="final-order" style="display: none;">
              <div class="final-order-opacity">
-                 <div class="container">
-                     <div class="final-order-body">
-                         <div class="tittle-final-order">
+                 <div class="final-order-body container">
+                     <div class="final-order-body-left">
+                         <div class="tittle-final-order-left">
                              <h2>Finalizar Pedido:</h2>
                          </div>
                          <div class="line-tittle"></div>
                          <div id="seus-itens"><strong>Seus Itens:</strong></div>
                          <div class="list-products-final-order"></div>
                          <div id="total-valor-itens"><strong>Valor Total: </strong></div>
+                         <div class="final-order-body-left-address">
+                             <div class="tittle-final-order-left">
+                                 <h2>Endereço de Entrega:</h2>
+                             </div>
+                             <div class="line-tittle"></div>
+                             <div class="final-order-body-left-address-body">
+                                 <form>
+                                     <div class="form-group">
+                                         <div id="rua-bairro-address">
+                                             <div>
+                                                 <label class="form-label mt-2">Rua:</label>
+                                                 <input type="text" class="form-control">
+                                             </div>
+                                             <div>
+                                                 <label class="form-label mt-2">Bairro:</label>
+                                                 <input type="text" class="form-control">
+                                             </div>
+                                         </div>
+                                         <div id="cidade-estado-address">
+                                             <div>
+                                                 <label class="form-label mt-2">Cidade:</label>
+                                                 <input type="text" class="form-control">
+                                             </div>
+                                             <div>
+                                                 <label class="form-label mt-2">Estado:</label>
+                                                 <input type="text" class="form-control">
+                                             </div>
+                                         </div>
+                                         <div class="final-order-address-buttons">
+                                             <button id="button-confirm-address" type="button" class="btn btn-light">Confirmar Endereço</button>
+                                             <button id="button-change-address" type="button" class="btn btn-light">Outro Endereço de Entrega</button>
+                                         </div>
+                                     </div>
+                                 </form>
+                                 <div class="line-address"></div>
+                                 <div class="choice-delivery">
+                                     <div class="choice-delivery-item">
+                                         <div class="choice-delivery-item-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                                         <div class="choice-delivery-item-content">
+                                             <h5>Entrega Express (De 5 a 7 dias úteis) - R$20,00</h5>
+                                         </div>
+                                         <div class="choice-delivery-item-option"><input class="form-check-input" type="checkbox" value="option1"></div>
+                                     </div>
+                                     <div class="choice-delivery-item">
+                                         <div class="choice-delivery-item-icon"><i class="fa-solid fa-truck"></i></div>
+                                         <div class="choice-delivery-item-content">
+                                             <h5>Entrega Normal (De 10 a 15 dias úteis) - R$10,00</h5>
+                                         </div>
+                                         <div class="choice-delivery-item-option"><input class="form-check-input" type="checkbox" value="option2"></div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="final-order-body-right" id="methods-payment">
+                         <div class="tittle-final-order-right">
+                             <h2 id="titulo-pagamentos">Forma de Pagamento:</h2>
+                         </div>
+                         <div class="line-tittle-payments"></div>
+                         <div class="tittle-final-order-right-body">
+                             <div id="payment-option-1" class="payment-option">
+                                 <i class="fa-solid fa-credit-card"></i>
+                                 <h5>Cartão de Crédito</h5>
+                             </div>
+                             <div id="payment-option-2" class="payment-option">
+                                 <i class="fa-regular fa-credit-card"></i>
+                                 <h5>Cartão de Débito</h5>
+                             </div>
+                             <div id="payment-option-3" class="payment-option">
+                                 <i class="fa-brands fa-pix"></i>
+                                 <h5>PIX</h5>
+                             </div>
+                             <div id="payment-option-4" class="payment-option">
+                                 <i class="fa-solid fa-file-invoice-dollar"></i>
+                                 <h5>Boleto</h5>
+                             </div>
+                             <div id="payment-option-5" class="payment-option">
+                                 <i class="fa-solid fa-wallet"></i>
+                                 <h5>Carteira Digital</h5>
+                             </div>
+                         </div>
+                     </div>
+                     <div id="method-card" class="final-order-body-right-card" style="display: none;">
+                         <div class="tittle-final-order-right">
+                             <h2>Forma de Pagamento:</h2>
+                         </div>
+                         <div class="line-tittle"></div>
+                         <div class="tittle-final-order-right-body-card">
+                             <i id="close-cart-payment" class="fa-solid fa-xmark"></i>
+                             <form>
+                                 <div>
+                                     <label>Numero do cartão</label>
+                                     <input type="text" class="form-control" maxlength="16" required>
+                                 </div>
+                                 <div>
+                                     <label>Nome do titular do cartão</label>
+                                     <input type="text" class="form-control" required>
+                                 </div>
+                                 <div>
+                                     <label>Vencimento</label>
+                                     <div id="vencimento">
+                                         <div>
+                                             <select class="form-control" required>
+                                                 <option>Mês</option>
+                                                 <option>1</option>
+                                                 <option>2</option>
+                                                 <option>3</option>
+                                                 <option>4</option>
+                                                 <option>5</option>
+                                                 <option>6</option>
+                                                 <option>7</option>
+                                                 <option>8</option>
+                                                 <option>9</option>
+                                                 <option>10</option>
+                                                 <option>11</option>
+                                                 <option>12</option>
+                                             </select>
+                                         </div>
+                                         <div>
+                                             <select class="form-control" id="select-ano" required>
+                                                 <option>Ano</option>
+                                                 <option>2023</option>
+                                                 <option>2024</option>
+                                                 <option>2025</option>
+                                                 <option>2026</option>
+                                                 <option>2027</option>
+                                                 <option>2028</option>
+                                                 <option>2029</option>
+                                                 <option>2030</option>
+                                                 <option>2031</option>
+                                                 <option>2032</option>
+                                                 <option>2033</option>
+                                                 <option>2034</option>
+                                             </select>
+                                         </div>
+                                         <div id="cvv">
+                                             <label>CVV:</label>
+                                             <input type="text" class="form-control" maxlength="3" required>
+                                         </div>
+                                     </div>
+                                     <div>
+                                         <label>Número de parcelas</label>
+                                         <select class="form-control" required>
+                                             <option></option>
+                                             <option></option>
+                                             <option></option>
+                                             <option></option>
+                                             <option></option>
+                                             <option></option>
+                                         </select>
+                                     </div>
+                                     <div id="button-confirm-card">
+                                         <button type="button" class="btn btn-primary">Confirmar</button>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
+                     <div id="method-card-debit" class="final-order-body-right-card" style="display: none;">
+                         <div class="tittle-final-order-right">
+                             <h2>Forma de Pagamento:</h2>
+                         </div>
+                         <div class="line-tittle"></div>
+                         <div class="tittle-final-order-right-body-card">
+                             <i id="close-cart-debit-payment" class="fa-solid fa-xmark"></i>
+                             <form>
+                                 <div>
+                                     <label>Numero do cartão</label>
+                                     <input type="text" class="form-control" maxlength="16" required>
+                                 </div>
+                                 <div>
+                                     <label>Nome do titular do cartão</label>
+                                     <input type="text" class="form-control" required>
+                                 </div>
+                                 <div>
+                                     <label>Vencimento</label>
+                                     <div id="vencimento">
+                                         <div>
+                                             <select class="form-control" required>
+                                                 <option>Mês</option>
+                                                 <option>1</option>
+                                                 <option>2</option>
+                                                 <option>3</option>
+                                                 <option>4</option>
+                                                 <option>5</option>
+                                                 <option>6</option>
+                                                 <option>7</option>
+                                                 <option>8</option>
+                                                 <option>9</option>
+                                                 <option>10</option>
+                                                 <option>11</option>
+                                                 <option>12</option>
+                                             </select>
+                                         </div>
+                                         <div>
+                                             <select class="form-control" id="select-ano" required>
+                                                 <option>Ano</option>
+                                                 <option>2023</option>
+                                                 <option>2024</option>
+                                                 <option>2025</option>
+                                                 <option>2026</option>
+                                                 <option>2027</option>
+                                                 <option>2028</option>
+                                                 <option>2029</option>
+                                                 <option>2030</option>
+                                                 <option>2031</option>
+                                                 <option>2032</option>
+                                                 <option>2033</option>
+                                                 <option>2034</option>
+                                             </select>
+                                         </div>
+                                         <div id="cvv">
+                                             <label>CVV:</label>
+                                             <input type="text" class="form-control" maxlength="3" required>
+                                         </div>
+                                     </div>
+                                     <div id="button-confirm-card-debit">
+                                         <button type="button" class="btn btn-primary">Confirmar</button>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
                      </div>
                  </div>
              </div>
+         </div>
+         </div>
          </div>
 
 
