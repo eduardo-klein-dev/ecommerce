@@ -147,7 +147,11 @@ def validaLogin(email, senha):
     converter = json.dumps(lista)
     con.close()
 
+    print(converter)
     return converter
+
+
+validaLogin('joaosilva@gmail.com', '123456')
 
 
 def enviaCadastro(nome, email, senha, rua, bairro, cidade, estado):
@@ -232,6 +236,32 @@ def finalizaPedido(session):
             "qt_produto": i[5],
             "perc_desconto": i[6],
             "valor_produto": i[7]
+        }
+        contador = contador + 1
+
+    converter = json.dumps(lista)
+    con.close()
+
+    return converter
+
+
+def consultaEndereco(idusuario):
+    val = str(idusuario)
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "select rua, bairro, cidade, estado from usuarios where idusuarios = %s"
+    c.execute(sql, (val,))
+
+    lista = dict()
+    contador = 0
+
+    for i in c.fetchall():
+        lista[contador] = {
+            "rua": i[0],
+            "bairro": i[1],
+            "cidade": i[2],
+            "estado": i[3]
         }
         contador = contador + 1
 

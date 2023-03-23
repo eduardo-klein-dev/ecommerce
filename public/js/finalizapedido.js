@@ -110,6 +110,51 @@ const inputBairro = document.querySelector('#input-address-bairro');
 const inputCidade = document.querySelector('#input-address-cidade');
 const inputEstado = document.querySelector('#input-address-estado');
 
+const adressOne = document.querySelector('#rua-bairro-address');
+const adressTwo = document.querySelector('#cidade-estado-address');
+
+function consultaEndereco(idusuario) {
+    $.ajax({
+        url: 'http://localhost:8000/api/ecommerce/consultaendereco/' + idusuario,
+        type: 'GET',
+        dataType: 'json',
+
+        beforeSend: function () { },
+
+        success: function (json) {
+            var html = '';
+            for (i = 0; i < Object.keys(json).length; i++) {
+                console.log(json[i]['rua'])
+                console.log(json[i]['bairro'])
+                console.log(json[i]['cidade'])
+                console.log(json[i]['estado'])
+            };
+
+
+            // for (i = 0; i < Object.keys(json).length; i++) {
+            //     html =+ '<div><label class="form-label mt-2">Rua:</label><input type="text" class="form-control" placeholder="'+  +'"></div><div><label class="form-label mt-2">Bairro:</label><input type="text" class="form-control"></div>'
+            // };
+
+            // document.cookie = "nome=João; expires=Thu, 23 Mar 2023 12:00:00 UTC; path=/";
+
+            // // Lê o valor do cookie 'nome'
+            // function getCookie(name) {
+            //     const cookies = document.cookie.split(';');
+            //     for (let i = 0; i < cookies.length; i++) {
+            //         const cookie = cookies[i].trim();
+            //         if (cookie.startsWith(`${name}=`)) {
+            //             return cookie.substring(name.length + 1, cookie.length);
+            //         }
+            //     }
+            //     return null;
+            // }
+
+            // const nome = getCookie('nome');
+            // console.log(nome); // Saída: "João"
+        }
+    });
+};
+
 
 // Script do Pagamento:
 

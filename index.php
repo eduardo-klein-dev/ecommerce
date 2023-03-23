@@ -311,7 +311,7 @@
                              <div class="line-tittle"></div>
                              <div class="final-order-body-left-address-body">
                                  <form>
-                                     <div class="form-group">
+                                     <div class="form-group" onload="consultaEndereco(idusuario)">
                                          <div id="rua-bairro-address">
                                              <div>
                                                  <label class="form-label mt-2">Rua:</label>

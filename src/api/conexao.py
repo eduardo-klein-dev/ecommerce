@@ -50,5 +50,9 @@ def svcAlteraCookie(session):
 def svcFinalizaPedido(session):
     return svc.finalizaPedido(session)
 
+@app.route('/api/ecommerce/consultaendereco/<int:idusuario>', methods=['GET'])
+def svcConsultaEndereco(idusuario):
+    return svc.consultaEndereco(idusuario)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
