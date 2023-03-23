@@ -365,24 +365,49 @@
                          <div class="line-tittle-payments"></div>
                          <div class="tittle-final-order-right-body">
                              <div id="payment-option-1" class="payment-option">
-                                 <i class="fa-solid fa-credit-card"></i>
-                                 <h5>Cartão de Crédito</h5>
+                                 <div class="payment-option-1-front">
+                                     <i class="fa-solid fa-credit-card"></i>
+                                     <h5>Cartão de Crédito</h5>
+                                 </div>
+                                 <div class="payment-option-1-back">
+                                     <h5><strong>Parcelas até 8x sendo até 5x sem juros!</strong></h5>
+                                 </div>
                              </div>
                              <div id="payment-option-2" class="payment-option">
-                                 <i class="fa-regular fa-credit-card"></i>
-                                 <h5>Cartão de Débito</h5>
+                                 <div class="payment-option-2-front">
+                                     <i class="fa-regular fa-credit-card"></i>
+                                     <h5>Cartão de Débito</h5>
+                                 </div>
+                                 <div class="payment-option-2-back">
+                                     <h5><strong>10% de desconto nesta forma de pagamento!</strong></h5>
+                                 </div>
                              </div>
                              <div id="payment-option-3" class="payment-option">
-                                 <i class="fa-brands fa-pix"></i>
-                                 <h5>PIX</h5>
+                                 <div class="payment-option-3-front">
+                                     <i class="fa-brands fa-pix"></i>
+                                     <h5>PIX</h5>
+                                 </div>
+                                 <div class="payment-option-3-back">
+                                     <h5><strong>15% de desconto nesta forma de pagamento!</strong></h5>
+                                 </div>
                              </div>
                              <div id="payment-option-4" class="payment-option">
-                                 <i class="fa-solid fa-file-invoice-dollar"></i>
-                                 <h5>Boleto</h5>
+                                 <div class="payment-option-4-front">
+                                     <i class="fa-solid fa-file-invoice-dollar"></i>
+                                     <h5>Boleto</h5>
+                                 </div>
+                                 <div class="payment-option-4-back">
+                                     <h5><strong>Emitimos boleto 7 dias para pagamento!</strong></h5>
+                                 </div>
                              </div>
                              <div id="payment-option-5" class="payment-option">
-                                 <i class="fa-solid fa-wallet"></i>
-                                 <h5>Carteira Digital</h5>
+                                 <div class="payment-option-5-front">
+                                     <i class="fa-solid fa-wallet"></i>
+                                     <h5>Carteira Digital</h5>
+                                 </div>
+                                 <div class="payment-option-5-back">
+                                     <h5><strong>Aceitamos as mais famosas carteiras digitais!</strong></h5>
+                                 </div>
                              </div>
                          </div>
                      </div>
@@ -456,7 +481,7 @@
                                          </select>
                                      </div>
                                      <div id="button-confirm-card">
-                                         <button type="button" class="btn btn-primary">Confirmar</button>
+                                         <button type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>
@@ -521,7 +546,100 @@
                                          </div>
                                      </div>
                                      <div id="button-confirm-card-debit">
-                                         <button type="button" class="btn btn-primary">Confirmar</button>
+                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
+                     <div id="method-pix" class="final-order-body-right-card" style="display: none;">
+                         <div class="tittle-final-order-right">
+                             <h2>Forma de Pagamento:</h2>
+                         </div>
+                         <div class="line-tittle"></div>
+                         <div class="tittle-final-order-right-body-card">
+                             <i id="close-pix" class="fa-solid fa-xmark"></i>
+                             <form>
+                                 <div>
+                                     <div class="form-group">
+                                         <label>Nome completo</label>
+                                         <input type="text" class="form-control" required>
+                                     </div>
+                                     <div class="form-group">
+                                         <label>CPF</label>
+                                         <input type="number" class="form-control" required>
+                                     </div>
+                                     <div class="form-group">
+                                         <label>E-mail</label>
+                                         <input type="email" class="form-control" required>
+                                     </div>
+                                     <div style="text-align: center; color: #fff;">
+                                         <small>Enviaremos o qrCode por e-mail para pagamento via PIX.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
+                                     </div>
+                                     <div id="button-confirm-pix">
+                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
+                     <div id="method-boleto" class="final-order-body-right-card" style="display: none;">
+                         <div class="tittle-final-order-right">
+                             <h2>Forma de Pagamento:</h2>
+                         </div>
+                         <div class="line-tittle"></div>
+                         <div class="tittle-final-order-right-body-card">
+                             <i id="close-boleto" class="fa-solid fa-xmark"></i>
+                             <form>
+                                 <div>
+                                     <div class="form-group">
+                                         <label>Nome completo</label>
+                                         <input type="text" class="form-control" required>
+                                     </div>
+                                     <div class="form-group">
+                                         <label>CPF</label>
+                                         <input type="number" class="form-control" required>
+                                     </div>
+                                     <div class="form-group">
+                                         <label>E-mail</label>
+                                         <input type="email" class="form-control" required>
+                                     </div>
+                                     <div style="text-align: center; color: #fff;">
+                                         <small>Enviaremos o boleto por e-mail para você.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
+                                     </div>
+                                     <div id="button-confirm-boleto">
+                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
+                     <div id="method-carteira-digital" class="final-order-body-right-card" style="display: none;">
+                         <div class="tittle-final-order-right">
+                             <h2>Forma de Pagamento:</h2>
+                         </div>
+                         <div class="line-tittle"></div>
+                         <div class="tittle-final-order-right-body-card">
+                             <i id="close-carteira-digital" class="fa-solid fa-xmark"></i>
+                             <form>
+                                 <div>
+                                     <div class="form-group">
+                                         <label>Nome completo</label>
+                                         <input type="text" class="form-control" required>
+                                     </div>
+                                     <div class="form-group">
+                                         <label>CPF</label>
+                                         <input type="number" class="form-control" required>
+                                     </div>
+                                     <div class="form-group">
+                                         <label>E-mail (conta da carteira digital utlizada)</label>
+                                         <input type="email" class="form-control" required>
+                                     </div>
+                                     <div style="text-align: center; color: #fff;">
+                                         <small>Enviaremos o link por e-mail com um redirecionamento para o App da Carteira Digital.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
+                                     </div>
+                                     <div id="button-confirm-carteira-digital">
+                                         <button type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>
@@ -532,8 +650,6 @@
          </div>
          </div>
          </div>
-
-
 
      </main>
 

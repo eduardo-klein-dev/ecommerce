@@ -103,6 +103,16 @@ function finalizaPedido(session) {
     });
 };
 
+// Script do Endereço:
+
+const inputRua = document.querySelector('#input-address-rua');
+const inputBairro = document.querySelector('#input-address-bairro');
+const inputCidade = document.querySelector('#input-address-cidade');
+const inputEstado = document.querySelector('#input-address-estado');
+
+
+// Script do Pagamento:
+
 // Funções de clique (métodos de pagamento):
 
 const metodosPagamento = document.querySelector('.tittle-final-order-right-body');
@@ -110,8 +120,14 @@ const tituloPagamento = document.querySelector('#titulo-pagamentos');
 const linhaPagamento = document.querySelector('.line-tittle-payments');
 
 // Métodos de Pagamento:
+
+const metodosDePagamento = document.querySelector('.final-order-body-right');
 const metodoCartao = document.querySelector('#method-card');
 const metodoCartaoDebito = document.querySelector('#method-card-debit');
+const metodoPix = document.querySelector('#method-pix');
+const metodoCarteiraDigital = document.querySelector('#method-carteira-digital');
+const metodoBoleto = document.querySelector('#method-boleto');
+
 const cartaoCredito = document.querySelector('#payment-option-1');
 const cartaoDebito = document.querySelector('#payment-option-2');
 const pix = document.querySelector('#payment-option-3');
@@ -121,13 +137,16 @@ const carteiraDigital = document.querySelector('#payment-option-5');
 // Fechar Telas:
 const fechaCartaoCredito = document.querySelector('#close-cart-payment');
 const fechaCartaoDebito = document.querySelector('#close-cart-debit-payment');
+const fechaPix = document.querySelector('#close-pix');
+const fechaCarteiraDigital = document.querySelector('#close-carteira-digital');
+const fechaBoleto = document.querySelector('#close-boleto');
 
 cartaoCredito.addEventListener('click', () => {
     metodosPagamento.style.display = 'none';
     tituloPagamento.style.display = 'none';
     linhaPagamento.style.display = 'none';
     metodoCartao.style.display = 'flex';
-    metodoCartao.style.width = '100%';
+    metodosDePagamento.style.display = 'none';
 });
 
 fechaCartaoCredito.addEventListener('click', () => {
@@ -135,6 +154,7 @@ fechaCartaoCredito.addEventListener('click', () => {
     tituloPagamento.style.display = 'block';
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
 });
 
 cartaoDebito.addEventListener('click', () => {
@@ -142,7 +162,7 @@ cartaoDebito.addEventListener('click', () => {
     tituloPagamento.style.display = 'none';
     linhaPagamento.style.display = 'none';
     metodoCartaoDebito.style.display = 'flex';
-    metodoCartaoDebito.style.width = '100%';
+    metodosDePagamento.style.display = 'none';
 });
 
 fechaCartaoDebito.addEventListener('click', () => {
@@ -150,4 +170,57 @@ fechaCartaoDebito.addEventListener('click', () => {
     tituloPagamento.style.display = 'block';
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
 });
+
+pix.addEventListener('click', () => {
+    metodosPagamento.style.display = 'none';
+    tituloPagamento.style.display = 'none';
+    linhaPagamento.style.display = 'none';
+    metodoPix.style.display = 'flex';
+    metodosDePagamento.style.display = 'none';
+});
+
+fechaPix.addEventListener('click', () => {
+    metodoPix.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+});
+
+
+boleto.addEventListener('click', () => {
+    metodosPagamento.style.display = 'none';
+    tituloPagamento.style.display = 'none';
+    linhaPagamento.style.display = 'none';
+    metodoBoleto.style.display = 'flex';
+    metodosDePagamento.style.display = 'none';
+});
+
+fechaBoleto.addEventListener('click', () => {
+    metodoBoleto.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+});
+
+carteiraDigital.addEventListener('click', () => {
+    metodosPagamento.style.display = 'none';
+    tituloPagamento.style.display = 'none';
+    linhaPagamento.style.display = 'none';
+    metodoCarteiraDigital.style.display = 'flex';
+    metodosDePagamento.style.display = 'none';
+});
+
+fechaCarteiraDigital.addEventListener('click', () => {
+    metodoCarteiraDigital.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+});
+
+// Confirmações dos métodos de pagamento:
+
