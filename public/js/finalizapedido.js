@@ -67,7 +67,6 @@ function finalizaPedido(session) {
                     var qtde = parseInt(json[i]['qt_produto']);
                     totalItem = total * qtde;
                     var totalFormatado = totalItem.toLocaleString('pt-BR', options);
-                    console.log(totalFormatado)
 
                     var preco = document.querySelector('.price-total-' + json[i]['id_produto'] + '');
                     preco.innerHTML = '<strong>R$ ' + totalFormatado + '</strong>';
@@ -110,8 +109,34 @@ const inputBairro = document.querySelector('#input-address-bairro');
 const inputCidade = document.querySelector('#input-address-cidade');
 const inputEstado = document.querySelector('#input-address-estado');
 
+var linhaAddress = document.querySelector('.line-address');
+var confirmAddress = document.querySelector('.final-order-address-confirm');
+var erroAddress = document.querySelector('.final-order-address-erro');
+var divButtonAltera = document.querySelector('#div-botao-altera');
+var divButtonConfirma = document.querySelector('#div-botao-confirma');
+
 const adressOne = document.querySelector('#rua-bairro-address');
 const adressTwo = document.querySelector('#cidade-estado-address');
+
+function pegaValorId() {
+    function getIDCookie() {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith("ID=")) {
+                return cookie.substring(3, cookie.length);
+            }
+        }
+        return null;
+    }
+
+    const idCookie = getIDCookie();
+    if (idCookie) {
+        consultaEndereco(idCookie)
+    } else {
+        console.log("Cookie 'ID' não encontrado.");
+    }
+}
 
 function consultaEndereco(idusuario) {
     $.ajax({
@@ -122,39 +147,83 @@ function consultaEndereco(idusuario) {
         beforeSend: function () { },
 
         success: function (json) {
-            var html = '';
+            var html1 = '';
+            var html2 = '';
+
             for (i = 0; i < Object.keys(json).length; i++) {
-                console.log(json[i]['rua'])
-                console.log(json[i]['bairro'])
-                console.log(json[i]['cidade'])
-                console.log(json[i]['estado'])
-            };
 
+                html1 += '<div><label class="form-label mt-2">Rua:</label><input id="input-rua-confirm" type="text" class="form-control" placeholder="' + json[i]['rua'] + '" disabled value="' + json[i]['rua'] + '"></div><div><label class="form-label mt-2">Bairro:</label><input id="input-bairro-confirm" type="text" class="form-control" placeholder="' + json[i]['bairro'] + '" disabled value="' + json[i]['bairro'] + '"></div>';
+                html2 += '<div><label class="form-label mt-2">Cidade:</label><input id="input-cidade-confirm" type="text" class="form-control" placeholder="' + json[i]['cidade'] + '" disabled value="' + json[i]['cidade'] + '"></div><div><label class="form-label mt-2">Estado:</label><input id="input-estado-confirm" type="text" class="form-control" placeholder="' + json[i]['estado'] + '" disabled value="' + json[i]['estado'] + '"></div>';
 
-            // for (i = 0; i < Object.keys(json).length; i++) {
-            //     html =+ '<div><label class="form-label mt-2">Rua:</label><input type="text" class="form-control" placeholder="'+  +'"></div><div><label class="form-label mt-2">Bairro:</label><input type="text" class="form-control"></div>'
-            // };
+            }
 
-            // document.cookie = "nome=João; expires=Thu, 23 Mar 2023 12:00:00 UTC; path=/";
-
-            // // Lê o valor do cookie 'nome'
-            // function getCookie(name) {
-            //     const cookies = document.cookie.split(';');
-            //     for (let i = 0; i < cookies.length; i++) {
-            //         const cookie = cookies[i].trim();
-            //         if (cookie.startsWith(`${name}=`)) {
-            //             return cookie.substring(name.length + 1, cookie.length);
-            //         }
-            //     }
-            //     return null;
-            // }
-
-            // const nome = getCookie('nome');
-            // console.log(nome); // Saída: "João"
+            adressOne.innerHTML = html1;
+            adressTwo.innerHTML = html2;
         }
     });
 };
 
+function cliqueAlteraEndereço() {
+    divButtonConfirma.innerHTML = '<button id="button-confirm-address" onclick="cliqueConfirmaEndereço()" type="button" class="btn btn-light">Confirmar Endereço</button>';
+    adressOne.innerHTML = '<div><label class="form-label mt-2">Rua:</label><input id="input-rua-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Bairro:</label><input id="input-bairro-confirm" type="text" class="form-control"></div>'
+    adressTwo.innerHTML = '<div><label class="form-label mt-2">Cidade:</label><input id="input-cidade-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Estado:</label><input id="input-estado-confirm" type="text" class="form-control"></div>'
+    if (confirmAddress.style.display == 'block') {
+        confirmAddress.style.display = 'none';
+    };
+};
+
+var RuaConfirm = '';
+var BairroConfirm = '';
+var CidadeConfirm = '';
+var EstadoConfirm = '';
+
+function cliqueConfirmaEndereço() {
+    var InputRuaConfirm = document.querySelector('#input-rua-confirm');
+    var InputBairroConfirm = document.querySelector('#input-bairro-confirm');
+    var InputCidadeConfirm = document.querySelector('#input-cidade-confirm');
+    var InputEstadoConfirm = document.querySelector('#input-estado-confirm');
+
+    RuaConfirm = InputRuaConfirm.value;
+    BairroConfirm = InputBairroConfirm.value;
+    CidadeConfirm = InputCidadeConfirm.value;
+    EstadoConfirm = InputEstadoConfirm.value;
+
+    if (RuaConfirm == '' || BairroConfirm == '' || CidadeConfirm == '' || EstadoConfirm == '') {
+        erroAddress.style.display = 'block';
+        linhaAddress.style.marginTop = '10px';
+
+        setTimeout(() => {
+            erroAddress.style.display = 'none';
+            linhaAddress.style.marginTop = '20px';
+        }, 5000);
+
+    } else {
+        confirmAddress.style.display = 'block';
+        linhaAddress.style.marginTop = '10px';
+        divButtonConfirma.innerHTML = '';
+
+        divButtonAltera.innerHTML = '<button id="button-change-address" style="margin-left: 0px !important" onclick="cliqueAlteraEndereço()" type="button" class="btn btn-light">Alterar Endereço de Entrega</button>';
+
+    }
+
+}
+
+// CheckBoxes Para Selecionar o tipo de Entrega:
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+function uncheckOtherBoxes(currentCheckbox) {
+    checkboxes.forEach((checkbox) => {
+        if (checkbox !== currentCheckbox) {
+            checkbox.checked = false;
+        }
+    });
+}
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('click', function () {
+        uncheckOtherBoxes(this);
+    });
+});
 
 // Script do Pagamento:
 

@@ -29,7 +29,7 @@
 
  </head>
 
- <body onload="verificaCarrinhoPopUp(idProdutoInserido), consultaCookieStatus(session), consultaCookie(session)">
+ <body onload="verificaCarrinhoPopUp(idProdutoInserido), consultaCookieStatus(session), consultaCookie(session), pegaValorId()">
 
      <div class="cookie" style="display: none;">
          <div class="cookie-body">
@@ -311,33 +311,39 @@
                              <div class="line-tittle"></div>
                              <div class="final-order-body-left-address-body">
                                  <form>
-                                     <div class="form-group" onload="consultaEndereco(idusuario)">
+                                     <div class="form-group">
                                          <div id="rua-bairro-address">
                                              <div>
                                                  <label class="form-label mt-2">Rua:</label>
-                                                 <input type="text" class="form-control">
+                                                 <input id="input-rua-confirm" type="text" class="form-control">
                                              </div>
                                              <div>
                                                  <label class="form-label mt-2">Bairro:</label>
-                                                 <input type="text" class="form-control">
+                                                 <input id="input-bairro-confirm" type="text" class="form-control">
                                              </div>
                                          </div>
                                          <div id="cidade-estado-address">
                                              <div>
                                                  <label class="form-label mt-2">Cidade:</label>
-                                                 <input type="text" class="form-control">
+                                                 <input id="input-cidade-confirm" type="text" class="form-control">
                                              </div>
                                              <div>
                                                  <label class="form-label mt-2">Estado:</label>
-                                                 <input type="text" class="form-control">
+                                                 <input id="input-estado-confirm" type="text" class="form-control">
                                              </div>
                                          </div>
                                          <div class="final-order-address-buttons">
-                                             <button id="button-confirm-address" type="button" class="btn btn-light">Confirmar Endereço</button>
-                                             <button id="button-change-address" type="button" class="btn btn-light">Outro Endereço de Entrega</button>
+                                             <div id="div-botao-confirma"><button id="button-confirm-address" onclick="cliqueConfirmaEndereço()" type="button" class="btn btn-light">Confirmar Endereço</button></div>
+                                             <div id="div-botao-altera"><button id="button-change-address" onclick="cliqueAlteraEndereço()" type="button" class="btn btn-light">Outro Endereço de Entrega</button></div>
                                          </div>
                                      </div>
                                  </form>
+                                 <div class="final-order-address-confirm" style="display: none;">
+                                     <h5>Endereço Confirmado!</h5>
+                                 </div>
+                                 <div class="final-order-address-erro" style="display: none;">
+                                     <h5>Endereço Incorreto! Favor verificar os campos inseridos!</h5>
+                                 </div>
                                  <div class="line-address"></div>
                                  <div class="choice-delivery">
                                      <div class="choice-delivery-item">
