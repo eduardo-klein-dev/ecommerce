@@ -427,19 +427,18 @@
                              <form>
                                  <div>
                                      <label>Numero do cartão</label>
-                                     <input type="text" class="form-control" maxlength="16" required>
+                                     <input id="cartao-input" type="text" class="form-control" maxlength="16" required>
                                  </div>
                                  <div>
                                      <label>Nome do titular do cartão</label>
-                                     <input type="text" class="form-control" required>
+                                     <input id="nome-cartao-input" type="text" class="form-control" required>
                                  </div>
                                  <div>
-                                     <label>Vencimento</label>
+                                     <label>Vencimento (Mês - Ano)</label>
                                      <div id="vencimento">
                                          <div>
-                                             <select class="form-control" required>
-                                                 <option>Mês</option>
-                                                 <option>1</option>
+                                             <select id="mes-cartao-input" class="form-control" required>
+                                                 <option selected>1</option>
                                                  <option>2</option>
                                                  <option>3</option>
                                                  <option>4</option>
@@ -454,9 +453,8 @@
                                              </select>
                                          </div>
                                          <div>
-                                             <select class="form-control" id="select-ano" required>
-                                                 <option>Ano</option>
-                                                 <option>2023</option>
+                                             <select id="ano-cartao-input" class="form-control" required>
+                                                 <option selected>2023</option>
                                                  <option>2024</option>
                                                  <option>2025</option>
                                                  <option>2026</option>
@@ -472,12 +470,14 @@
                                          </div>
                                          <div id="cvv">
                                              <label>CVV:</label>
-                                             <input type="text" class="form-control" maxlength="3" required>
+                                             <input id="cvv-credito-input" type="number" class="form-control" max="999" required>
                                          </div>
                                      </div>
                                      <div>
                                          <label>Número de parcelas</label>
-                                         <select class="form-control" required>
+                                         <select id="parcelas" class="form-control" required>
+                                             <option></option>
+                                             <option></option>
                                              <option></option>
                                              <option></option>
                                              <option></option>
@@ -503,7 +503,7 @@
                              <form>
                                  <div>
                                      <label>Numero do cartão</label>
-                                     <input type="text" class="form-control" maxlength="16" required>
+                                     <input id="cartao-input" type="text" class="form-control" maxlength="16" required>
                                  </div>
                                  <div>
                                      <label>Nome do titular do cartão</label>
@@ -513,9 +513,8 @@
                                      <label>Vencimento</label>
                                      <div id="vencimento">
                                          <div>
-                                             <select class="form-control" required>
-                                                 <option>Mês</option>
-                                                 <option>1</option>
+                                             <select id="mes-cartao-input" class="form-control" required>
+                                                 <option selected>1</option>
                                                  <option>2</option>
                                                  <option>3</option>
                                                  <option>4</option>
@@ -530,9 +529,8 @@
                                              </select>
                                          </div>
                                          <div>
-                                             <select class="form-control" id="select-ano" required>
-                                                 <option>Ano</option>
-                                                 <option>2023</option>
+                                             <select id="ano-cartao-input" class="form-control" required>
+                                                 <option selected>2023</option>
                                                  <option>2024</option>
                                                  <option>2025</option>
                                                  <option>2026</option>
@@ -548,7 +546,7 @@
                                          </div>
                                          <div id="cvv">
                                              <label>CVV:</label>
-                                             <input type="text" class="form-control" maxlength="3" required>
+                                             <input id="cvv-debito-input" type="text" maxlength="3" class="form-control" required>
                                          </div>
                                      </div>
                                      <div id="button-confirm-card-debit">
@@ -573,7 +571,7 @@
                                      </div>
                                      <div class="form-group">
                                          <label>CPF</label>
-                                         <input type="number" class="form-control" required>
+                                         <input id="cpf-input" maxlength="11" type="text" class="form-control" required>
                                      </div>
                                      <div class="form-group">
                                          <label>E-mail</label>
@@ -604,7 +602,7 @@
                                      </div>
                                      <div class="form-group">
                                          <label>CPF</label>
-                                         <input type="number" class="form-control" required>
+                                         <input id="cpf-input" type="text" maxlength="11" class="form-control" required>
                                      </div>
                                      <div class="form-group">
                                          <label>E-mail</label>
@@ -635,7 +633,7 @@
                                      </div>
                                      <div class="form-group">
                                          <label>CPF</label>
-                                         <input type="number" class="form-control" required>
+                                         <input id="cpf-input" type="text" maxlength="11" class="form-control" required>
                                      </div>
                                      <div class="form-group">
                                          <label>E-mail (conta da carteira digital utlizada)</label>

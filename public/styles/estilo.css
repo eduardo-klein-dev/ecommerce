@@ -1052,13 +1052,13 @@ header {
     width: 80px;
 }
 
-#select-ano {
+#ano-cartao-input {
     margin-right: 10px;
     margin-left: 10px;
 }
 
 #cvv {
-    flex: 1;
+    flex: 1; 
     margin-top: -27px;
 }
 

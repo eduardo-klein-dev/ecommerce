@@ -95,6 +95,45 @@ function finalizaPedido(session) {
                 }
             }
 
+            const parcela = document.querySelector('#parcelas');
+
+            var valorParcela1 = precoTotalItens;
+            var valorParcela2 = (precoTotalItens / 2).toFixed(2);
+            var valorParcela3 = (precoTotalItens / 3).toFixed(2);
+            var valorParcela4 = (precoTotalItens / 4).toFixed(2);
+            var valorParcela5 = (precoTotalItens / 5).toFixed(2);
+            var valorParcela6 = (((precoTotalItens * 0.05) + precoTotalItens) / 6).toFixed(2);
+            var valorParcela7 = (((precoTotalItens * 0.10) + precoTotalItens) / 7).toFixed(2);
+            var valorParcela8 = (((precoTotalItens * 0.15) + precoTotalItens) / 8).toFixed(2);
+
+            valorParcela1 = parseFloat(valorParcela1)
+            valorParcela2 = parseFloat(valorParcela2)
+            valorParcela3 = parseFloat(valorParcela3)
+            valorParcela4 = parseFloat(valorParcela4)
+            valorParcela5 = parseFloat(valorParcela5)
+            valorParcela6 = parseFloat(valorParcela6)
+            valorParcela7 = parseFloat(valorParcela7)
+            valorParcela8 = parseFloat(valorParcela8)
+
+            var opcoes = {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            };
+
+            var valorParcelaStr1 = '1x ' + valorParcela1.toLocaleString('pt-BR', opcoes);
+            var valorParcelaStr2 = '2x ' + valorParcela2.toLocaleString('pt-BR', opcoes);
+            var valorParcelaStr3 = '3x ' + valorParcela3.toLocaleString('pt-BR', opcoes);
+            var valorParcelaStr4 = '4x ' + valorParcela4.toLocaleString('pt-BR', opcoes);
+            var valorParcelaStr5 = '5x ' + valorParcela5.toLocaleString('pt-BR', opcoes);
+            var valorParcelaStr6 = '6x ' + valorParcela6.toLocaleString('pt-BR', opcoes) + '*';
+            var valorParcelaStr7 = '7x ' + valorParcela7.toLocaleString('pt-BR', opcoes) + '*';
+            var valorParcelaStr8 = '8x ' + valorParcela8.toLocaleString('pt-BR', opcoes) + '*';
+
+            parcela.innerHTML = '<option selected>' + valorParcelaStr1 + '</option><option>' + valorParcelaStr2 + '</option><option>' + valorParcelaStr3 + '</option><option>' + valorParcelaStr4 + '</option><option>' + valorParcelaStr5 + '</option><option>' + valorParcelaStr6 + '</option><option>' + valorParcelaStr7 + '</option><option>' + valorParcelaStr8 + '</option>'
+
+
             const precoFormatado = precoTotalItens.toLocaleString('pt-BR', options);
             document.querySelector('#total-valor-itens').innerHTML = '<strong>Valor Total: R$ ' + precoFormatado + '</strong>';
 
@@ -166,7 +205,7 @@ function consultaEndereco(idusuario) {
 function cliqueAlteraEndereço() {
     divButtonConfirma.innerHTML = '<button id="button-confirm-address" onclick="cliqueConfirmaEndereço()" type="button" class="btn btn-light">Confirmar Endereço</button>';
     adressOne.innerHTML = '<div><label class="form-label mt-2">Rua:</label><input id="input-rua-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Bairro:</label><input id="input-bairro-confirm" type="text" class="form-control"></div>'
-    adressTwo.innerHTML = '<div><label class="form-label mt-2">Cidade:</label><input id="input-cidade-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Estado:</label><input id="input-estado-confirm" type="text" class="form-control"></div>'
+    adressTwo.innerHTML = '<div><label class="form-label mt-2">Cidade:</label><input id="input-cidade-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Estado:</label><select id="input-estado-confirm" class="form-control"><option>Escolha a opção</option><option>Acre</option><option>Alagoas</option><option>Amapá</option><option>Amazonas</option><option>Bahia</option><option>Ceará</option><option>Espírito Santo</option><option>Goiás</option><option>Maranhão</option><option>Mato Grosso</option><option>Mato Grosso do Sul</option><option>Pará</option><option>Paraíba</option><option>Paraná</option><option>Pernambuco</option><option>Piauí</option><option>Rio de Janeiro</option><option>Rio Grande do Norte</option><option>Rio Grande do Sul</option><option>Rondônia</option><option>Roraima</option><option>Santa Catarina</option><option>São Paulo</option><option>Sergipe</option><option>Tocantins</option></select ></div ></div > '
     if (confirmAddress.style.display == 'block') {
         confirmAddress.style.display = 'none';
     };
@@ -255,6 +294,15 @@ const fechaPix = document.querySelector('#close-pix');
 const fechaCarteiraDigital = document.querySelector('#close-carteira-digital');
 const fechaBoleto = document.querySelector('#close-boleto');
 
+// Inputs dos métodos de pagamento:
+
+var inputCartaoCredito = document.querySelector('#cartao-input');
+var inputCartaoCreditoNome = document.querySelector('#nome-cartao-input');
+var inputMesValidade = document.querySelector('#mes-cartao-input');
+var inputAnoValidade = document.querySelector('#ano-cartao-input');
+const inputCvv = document.querySelector('#cvv-credito-input');
+
+
 cartaoCredito.addEventListener('click', () => {
     metodosPagamento.style.display = 'none';
     tituloPagamento.style.display = 'none';
@@ -269,6 +317,11 @@ fechaCartaoCredito.addEventListener('click', () => {
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
     metodosDePagamento.style.display = 'flex';
+    inputCartaoCredito.value = '';
+    inputCartaoCreditoNome.value = '';
+    inputMesValidade.value = '';
+    inputAnoValidade.value = '';
+    inputCvv.value = '';
 });
 
 cartaoDebito.addEventListener('click', () => {
@@ -336,5 +389,36 @@ fechaCarteiraDigital.addEventListener('click', () => {
     metodosDePagamento.style.display = 'flex';
 });
 
-// Confirmações dos métodos de pagamento:
+// Confirmações dos dados dos métodos de pagamento:
 
+const cpfInputs = document.querySelectorAll('#cpf-input');
+const InputcartaoInputs = document.querySelectorAll('#cartao-input');
+
+cpfInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        let cpf = input.value.replace(/\D/g, '');
+        cpf = cpf.substring(0, 11);
+        cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        input.value = cpf;
+    });
+});
+
+InputcartaoInputs.forEach(input => {
+    input.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+        if (this.value.length > 16) {
+            this.value = this.value.slice(0, 16);
+        }
+        this.value = this.value.replace(/^(\d{4})?(\d{4})?(\d{4})?(\d{4})?$/, function (match, g1, g2, g3, g4) {
+            return [g1, g2, g3, g4].filter(Boolean).join(' ');
+        });
+    });
+});
+
+// var DebitoCVV = document.querySelector('#cvv-debito-input');
+// DebitoCVV.forEach(input => {
+//     input.addEventListener('input', () => {
+//         let cvv = input.value.replace(/\D/g, '');
+//         input.value = cvv;
+//     });
+// });
