@@ -427,11 +427,11 @@
                              <form>
                                  <div>
                                      <label>Numero do cartão</label>
-                                     <input id="cartao-input" type="text" class="form-control" maxlength="16" required>
+                                     <input id="cartao-credit-input" type="text" class="form-control" maxlength="16" required>
                                  </div>
                                  <div>
                                      <label>Nome do titular do cartão</label>
-                                     <input id="nome-cartao-input" type="text" class="form-control" required>
+                                     <input id="nome-credit-input" type="text" class="form-control" required>
                                  </div>
                                  <div>
                                      <label>Vencimento (Mês - Ano)</label>
@@ -470,7 +470,7 @@
                                          </div>
                                          <div id="cvv">
                                              <label>CVV:</label>
-                                             <input id="cvv-credito-input" type="number" class="form-control" max="999" required>
+                                             <input id="cvv-input-credit" type="text" maxlength="3" class="form-control" required>
                                          </div>
                                      </div>
                                      <div>
@@ -503,11 +503,11 @@
                              <form>
                                  <div>
                                      <label>Numero do cartão</label>
-                                     <input id="cartao-input" type="text" class="form-control" maxlength="16" required>
+                                     <input id="cartao-debit-input" type="text" class="form-control" maxlength="16" required>
                                  </div>
                                  <div>
                                      <label>Nome do titular do cartão</label>
-                                     <input type="text" class="form-control" required>
+                                     <input id="nome-debit-input" type="text" class="form-control" required>
                                  </div>
                                  <div>
                                      <label>Vencimento</label>
@@ -546,7 +546,7 @@
                                          </div>
                                          <div id="cvv">
                                              <label>CVV:</label>
-                                             <input id="cvv-debito-input" type="text" maxlength="3" class="form-control" required>
+                                             <input id="cvv-input-debit" type="text" maxlength="3" class="form-control" required>
                                          </div>
                                      </div>
                                      <div id="button-confirm-card-debit">
@@ -567,15 +567,15 @@
                                  <div>
                                      <div class="form-group">
                                          <label>Nome completo</label>
-                                         <input type="text" class="form-control" required>
+                                         <input id="nome-pix" type="text" class="form-control" required>
                                      </div>
                                      <div class="form-group">
                                          <label>CPF</label>
-                                         <input id="cpf-input" maxlength="11" type="text" class="form-control" required>
+                                         <input id="cpf-pix" class="form-control cpf-input" maxlength="11" type="text" required>
                                      </div>
                                      <div class="form-group">
                                          <label>E-mail</label>
-                                         <input type="email" class="form-control" required>
+                                         <input id="email-pix" type="email" class="form-control" required>
                                      </div>
                                      <div style="text-align: center; color: #fff;">
                                          <small>Enviaremos o qrCode por e-mail para pagamento via PIX.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
@@ -598,15 +598,15 @@
                                  <div>
                                      <div class="form-group">
                                          <label>Nome completo</label>
-                                         <input type="text" class="form-control" required>
+                                         <input id="nome-boleto" type="text" class="form-control" required>
                                      </div>
                                      <div class="form-group">
                                          <label>CPF</label>
-                                         <input id="cpf-input" type="text" maxlength="11" class="form-control" required>
+                                         <input id="cpf-boleto" class="form-control cpf-input" type="text" maxlength="11" required>
                                      </div>
                                      <div class="form-group">
                                          <label>E-mail</label>
-                                         <input type="email" class="form-control" required>
+                                         <input id="email-boleto" type="email" class="form-control" required>
                                      </div>
                                      <div style="text-align: center; color: #fff;">
                                          <small>Enviaremos o boleto por e-mail para você.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
@@ -629,15 +629,15 @@
                                  <div>
                                      <div class="form-group">
                                          <label>Nome completo</label>
-                                         <input type="text" class="form-control" required>
+                                         <input id="nome-carteiradigital" type="text" class="form-control" required>
                                      </div>
                                      <div class="form-group">
                                          <label>CPF</label>
-                                         <input id="cpf-input" type="text" maxlength="11" class="form-control" required>
+                                         <input id="cpf-carteiradigital" class="cpf-input form-control" type="text" maxlength="11" required>
                                      </div>
                                      <div class="form-group">
                                          <label>E-mail (conta da carteira digital utlizada)</label>
-                                         <input type="email" class="form-control" required>
+                                         <input id="email-carteiradigital" type="email" class="form-control" required>
                                      </div>
                                      <div style="text-align: center; color: #fff;">
                                          <small>Enviaremos o link por e-mail com um redirecionamento para o App da Carteira Digital.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>

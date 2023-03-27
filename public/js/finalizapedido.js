@@ -296,12 +296,23 @@ const fechaBoleto = document.querySelector('#close-boleto');
 
 // Inputs dos métodos de pagamento:
 
-var inputCartaoCredito = document.querySelector('#cartao-input');
-var inputCartaoCreditoNome = document.querySelector('#nome-cartao-input');
+var inputCartaoCredito = document.querySelector('#cartao-credit-input');
+var inputCartaoDebito = document.querySelector('#cartao-debit-input');
+var inputCartaoCreditoNome = document.querySelector('#nome-credit-input');
+var inputCartaoDebitoNome = document.querySelector('#nome-debit-input');
 var inputMesValidade = document.querySelector('#mes-cartao-input');
 var inputAnoValidade = document.querySelector('#ano-cartao-input');
-const inputCvv = document.querySelector('#cvv-credito-input');
-
+var valueInputCVV = document.querySelector('#cvv-input-credit');
+var valueInputCVVDebit = document.querySelector('#cvv-input-debit');
+var inputsCpfPix = document.querySelector('#cpf-pix');
+var inputsEmailPix = document.querySelector('#email-pix');
+var inputsNomePix = document.querySelector('#nome-pix');
+var inputsCpfBoleto = document.querySelector('#cpf-boleto');
+var inputsEmailBoleto = document.querySelector('#email-boleto');
+var inputsNomeBoleto = document.querySelector('#nome-boleto');
+var inputsCpfCarteira = document.querySelector('#cpf-carteiradigital');
+var inputsEmailCarteira = document.querySelector('#email-carteiradigital');
+var inputsNomeCarteira = document.querySelector('#nome-carteiradigital');
 
 cartaoCredito.addEventListener('click', () => {
     metodosPagamento.style.display = 'none';
@@ -321,7 +332,7 @@ fechaCartaoCredito.addEventListener('click', () => {
     inputCartaoCreditoNome.value = '';
     inputMesValidade.value = '';
     inputAnoValidade.value = '';
-    inputCvv.value = '';
+    valueInputCVV.value = '';
 });
 
 cartaoDebito.addEventListener('click', () => {
@@ -338,6 +349,9 @@ fechaCartaoDebito.addEventListener('click', () => {
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
     metodosDePagamento.style.display = 'flex';
+    inputCartaoDebito.value = '';
+    valueInputCVVDebit.value = '';
+    inputCartaoDebitoNome.value = '';
 });
 
 pix.addEventListener('click', () => {
@@ -354,6 +368,9 @@ fechaPix.addEventListener('click', () => {
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
     metodosDePagamento.style.display = 'flex';
+    inputsCpfPix.value = '';
+    inputsNomePix.value = '';
+    inputsEmailPix.value = '';
 });
 
 
@@ -371,6 +388,9 @@ fechaBoleto.addEventListener('click', () => {
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
     metodosDePagamento.style.display = 'flex';
+    inputsCpfBoleto.value = '';
+    inputsEmailBoleto.value = '';
+    inputsNomeBoleto.value = '';
 });
 
 carteiraDigital.addEventListener('click', () => {
@@ -387,12 +407,23 @@ fechaCarteiraDigital.addEventListener('click', () => {
     linhaPagamento.style.display = 'block';
     metodosPagamento.style.display = 'grid';
     metodosDePagamento.style.display = 'flex';
+    inputsCpfCarteira.value = '';
+    inputsNomeCarteira.value = '';
+    inputsEmailCarteira.value = '';
 });
 
 // Confirmações dos dados dos métodos de pagamento:
 
-const cpfInputs = document.querySelectorAll('#cpf-input');
-const InputcartaoInputs = document.querySelectorAll('#cartao-input');
+const cpfInputs = document.querySelectorAll('.cpf-input');
+const inputsNomeCartaoCredit = document.querySelector('#nome-credit-input');
+const inputsNomeCartaoDebit = document.querySelector('#nome-debit-input');
+const InputcartaoCredito = document.querySelectorAll('#cartao-credit-input');
+const InputcartaoDebito = document.querySelectorAll('#cartao-debit-input');
+const CreditoCVV = document.querySelectorAll('#cvv-input-credit');
+const DebitoCVV = document.querySelectorAll('#cvv-input-debit');
+const nomePix = document.querySelector('#nome-pix');
+const nomeBoleto = document.querySelector('#nome-boleto');
+const nomeCarteiraDigital = document.querySelector('#nome-carteiradigital');
 
 cpfInputs.forEach(input => {
     input.addEventListener('input', () => {
@@ -403,7 +434,7 @@ cpfInputs.forEach(input => {
     });
 });
 
-InputcartaoInputs.forEach(input => {
+InputcartaoCredito.forEach(input => {
     input.addEventListener('input', function () {
         this.value = this.value.replace(/\D/g, '');
         if (this.value.length > 16) {
@@ -415,10 +446,63 @@ InputcartaoInputs.forEach(input => {
     });
 });
 
-// var DebitoCVV = document.querySelector('#cvv-debito-input');
-// DebitoCVV.forEach(input => {
-//     input.addEventListener('input', () => {
-//         let cvv = input.value.replace(/\D/g, '');
-//         input.value = cvv;
-//     });
-// });
+InputcartaoDebito.forEach(input => {
+    input.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+        if (this.value.length > 16) {
+            this.value = this.value.slice(0, 16);
+        }
+        this.value = this.value.replace(/^(\d{4})?(\d{4})?(\d{4})?(\d{4})?$/, function (match, g1, g2, g3, g4) {
+            return [g1, g2, g3, g4].filter(Boolean).join(' ');
+        });
+    });
+});
+
+CreditoCVV.forEach(input => {
+    input.addEventListener('input', () => {
+        let cvv = input.value.replace(/\D/g, '');
+        input.value = cvv;
+    });
+});
+
+DebitoCVV.forEach(input => {
+    input.addEventListener('input', () => {
+        let cvv = input.value.replace(/\D/g, '');
+        input.value = cvv;
+    });
+});
+
+inputsNomeCartaoCredit.addEventListener('input', () => {
+    let nome = inputsNomeCartaoCredit.value;
+    nome = nome.replace(/[0-9]/g, '');
+    nome = nome.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+    inputsNomeCartaoCredit.value = nome;
+});
+
+inputsNomeCartaoDebit.addEventListener('input', () => {
+    let nome = inputsNomeCartaoDebit.value;
+    nome = nome.replace(/[0-9]/g, '');
+    nome = nome.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+    inputsNomeCartaoDebit.value = nome;
+});
+
+nomePix.addEventListener('input', () => {
+    let nome = nomePix.value;
+    nome = nome.replace(/[0-9]/g, '');
+    nome = nome.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+    nomePix.value = nome;
+});
+
+nomeBoleto.addEventListener('input', () => {
+    let nome = nomeBoleto.value;
+    nome = nome.replace(/[0-9]/g, '');
+    nome = nome.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+    nomeBoleto.value = nome;
+});
+
+nomeCarteiraDigital.addEventListener('input', () => {
+    let nome = nomeCarteiraDigital.value;
+    nome = nome.replace(/[0-9]/g, '');
+    nome = nome.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+    nomeCarteiraDigital.value = nome;
+});
