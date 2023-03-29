@@ -298,7 +298,7 @@
                  <div class="final-order-body container">
                      <div class="final-order-body-left">
                          <div class="tittle-final-order-left">
-                             <h2>Finalizar Pedido:</h2>
+                             <h2>Itens do Pedido:</h2>
                          </div>
                          <div class="line-tittle"></div>
                          <div id="seus-itens"><strong>Seus Itens:</strong></div>
@@ -416,6 +416,17 @@
                                  </div>
                              </div>
                          </div>
+                         <div class="end-of-order-completion">
+                             <div class="tittle-final-end-left">
+                                 <h2>Finalizar Pedido:</h2>
+                             </div>
+                             <div class="line-tittle-payments"></div>
+                             <div class="end-of-order-completion-body">
+                                 <h5 style="font-size: 22px; width: 400px; text-align: center;">Aguardando a confirmação de endereço, forma de entrega e pagamento...</h5>
+                                 <i style="margin-top: 5px; margin-bottom: 20px; font-size: 50px; text-align: center;" class="fa-regular fa-clock"></i>
+                                 <div class="end-of-order-completion-body-table"></div>
+                             </div>
+                         </div>
                      </div>
                      <div id="method-card" class="final-order-body-right-card" style="display: none;">
                          <div class="tittle-final-order-right">
@@ -424,7 +435,7 @@
                          <div class="line-tittle"></div>
                          <div class="tittle-final-order-right-body-card">
                              <i id="close-cart-payment" class="fa-solid fa-xmark"></i>
-                             <form>
+                             <form id="form-credit">
                                  <div>
                                      <label>Numero do cartão</label>
                                      <input id="cartao-credit-input" type="text" class="form-control" maxlength="16" required>
@@ -487,7 +498,7 @@
                                          </select>
                                      </div>
                                      <div id="button-confirm-card">
-                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                         <button id="btn-confirm-credit" type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>
@@ -500,7 +511,7 @@
                          <div class="line-tittle"></div>
                          <div class="tittle-final-order-right-body-card">
                              <i id="close-cart-debit-payment" class="fa-solid fa-xmark"></i>
-                             <form>
+                             <form id="form-debit">
                                  <div>
                                      <label>Numero do cartão</label>
                                      <input id="cartao-debit-input" type="text" class="form-control" maxlength="16" required>
@@ -550,7 +561,7 @@
                                          </div>
                                      </div>
                                      <div id="button-confirm-card-debit">
-                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                         <button id="btn-confirm-debit" type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>
@@ -563,7 +574,7 @@
                          <div class="line-tittle"></div>
                          <div class="tittle-final-order-right-body-card">
                              <i id="close-pix" class="fa-solid fa-xmark"></i>
-                             <form>
+                             <form id="form-pix">
                                  <div>
                                      <div class="form-group">
                                          <label>Nome completo</label>
@@ -581,7 +592,7 @@
                                          <small>Enviaremos o qrCode por e-mail para pagamento via PIX.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
                                      </div>
                                      <div id="button-confirm-pix">
-                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                         <button id="btn-confirm-pix" type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>
@@ -594,7 +605,7 @@
                          <div class="line-tittle"></div>
                          <div class="tittle-final-order-right-body-card">
                              <i id="close-boleto" class="fa-solid fa-xmark"></i>
-                             <form>
+                             <form id="form-boleto">
                                  <div>
                                      <div class="form-group">
                                          <label>Nome completo</label>
@@ -612,7 +623,7 @@
                                          <small>Enviaremos o boleto por e-mail para você.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
                                      </div>
                                      <div id="button-confirm-boleto">
-                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                         <button id="btn-confirm-boleto" type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>
@@ -625,7 +636,7 @@
                          <div class="line-tittle"></div>
                          <div class="tittle-final-order-right-body-card">
                              <i id="close-carteira-digital" class="fa-solid fa-xmark"></i>
-                             <form>
+                             <form id="form-carteiradigital">
                                  <div>
                                      <div class="form-group">
                                          <label>Nome completo</label>
@@ -643,7 +654,7 @@
                                          <small>Enviaremos o link por e-mail com um redirecionamento para o App da Carteira Digital.<br>(Nosso e-mail de contato é financeiro@devtech.com.br cuidado com golpes de spam)</small>
                                      </div>
                                      <div id="button-confirm-carteira-digital">
-                                         <button type="submit" class="btn btn-primary">Confirmar</button>
+                                         <button id="btn-confirm-carteiradigital" type="submit" class="btn btn-primary">Confirmar</button>
                                      </div>
                                  </div>
                              </form>

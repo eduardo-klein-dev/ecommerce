@@ -4,6 +4,10 @@ var cartPedido = document.querySelector('.cart');
 var nomeCliente = document.querySelector('#user-info');
 var listagemItens = document.querySelector('.list-products-final-order');
 var precoTotalItens = 0;
+var isChecked = false;
+var isCheckedAdress = false;
+var isCheckedPayment = false;
+
 const options = {
     style: 'decimal',
     minimumFractionDigits: 2,
@@ -45,9 +49,8 @@ function finalizaPedido(session) {
             var html = '';
 
             for (i = 0; i < Object.keys(json).length; i++) {
-                // json[i]['id_produto'];
-                html += '<div class="product-final-order"><div class="product-final-order-left"><img src="public/imgs/produtos/' + json[i]['id_produto'] + '.png"></div><div class="product-final-order-right"><h5 class="product-final-order-name">' + json[i]['nome_produto'] + '</h5><label class="product-final-order-infos"><em>- Serial: ' + json[i]['serial_produto'] + '</em></label><br><label class="product-final-order-infos"><em>- Marca: ' + json[i]['nome_fornecedor'] + '</em></label><br><label class="product-final-order-infos"><em>- Quantidade: ' + json[i]['qt_produto'] + '</em></label></div><div class="product-final-order-price"><label style="text-decoration: line-through; font-size: 14px" class="price-scratched-' + json[i]['id_produto'] + '">R$' + json[i]['valor_produto'] + '</label><label style="color:red; font-size:14px" class="descont-item-' + json[i]['id_produto'] + '">' + json[i]['perc_desconto'] + '%</label><label class="price-total-' + json[i]['id_produto'] + '"><strong></strong></label></div></div>';
 
+                html += '<div class="product-final-order"><div class="product-final-order-left"><img src="public/imgs/produtos/' + json[i]['id_produto'] + '.png"></div><div class="product-final-order-right"><h5 class="product-final-order-name">' + json[i]['nome_produto'] + '</h5><label class="product-final-order-infos"><em>- Serial: ' + json[i]['serial_produto'] + '</em></label><br><label class="product-final-order-infos"><em>- Marca: ' + json[i]['nome_fornecedor'] + '</em></label><br><label class="product-final-order-infos"><em>- Quantidade: ' + json[i]['qt_produto'] + '</em></label></div><div class="product-final-order-price"><label style="text-decoration: line-through; font-size: 14px" class="price-scratched-' + json[i]['id_produto'] + '">R$' + json[i]['valor_produto'] + '</label><label style="color:red; font-size:14px" class="descont-item-' + json[i]['id_produto'] + '">' + json[i]['perc_desconto'] + '%</label><label class="price-total-' + json[i]['id_produto'] + '"><strong></strong></label></div></div>';
 
             };
             listagemItens.innerHTML = html;
@@ -64,20 +67,24 @@ function finalizaPedido(session) {
                     var novoValor1 = valor1.replace(".", "").replace(",", ".");
                     var valor2 = ((novoValor1 * json[i]['perc_desconto']) / 100).toFixed(2);
                     var total = (novoValor1 - valor2);
-                    var qtde = parseInt(json[i]['qt_produto']);
-                    totalItem = total * qtde;
-                    var totalFormatado = totalItem.toLocaleString('pt-BR', options);
 
-                    var preco = document.querySelector('.price-total-' + json[i]['id_produto'] + '');
-                    preco.innerHTML = '<strong>R$ ' + totalFormatado + '</strong>';
+                    var qtde = parseInt(json[i]['qt_produto']);
+                    var totalItem = total * qtde;
+                    var totalItemFormatado = totalItem.toLocaleString('pt-BR', options);
+
+                    preco.innerHTML = '<strong>R$ ' + totalItemFormatado + '</strong>';
                     precoInicial.innerHTML = 'R$ ' + valor1;
                     desconto.innerHTML = '<strong>-' + json[i]['perc_desconto'] + '%</strong>';
-                    var precoTotalItem = parseFloat(total);
+                    var precoTotalItem = parseFloat(totalItem);
                     precoTotalItens = precoTotalItens + precoTotalItem;
 
 
                 } else {
 
+                    var item = parseInt(json[i]['valor_produto']);
+                    var qtde = parseInt(json[i]['qt_produto']);
+                    var totalItem = item * qtde;
+                    var totalFormatado = totalItem.toLocaleString('pt-BR', options);
                     preco.innerHTML = '<strong>R$ ' + totalFormatado + '</strong>';
                     precoInicial.innerHTML = '';
                     desconto.innerHTML = '';
@@ -135,7 +142,7 @@ function finalizaPedido(session) {
 
 
             const precoFormatado = precoTotalItens.toLocaleString('pt-BR', options);
-            document.querySelector('#total-valor-itens').innerHTML = '<strong>Valor Total: R$ ' + precoFormatado + '</strong>';
+            document.querySelector('#total-valor-itens').innerHTML = '<strong>Valor Total dos Itens: R$ ' + precoFormatado + '</strong>';
 
         }
     });
@@ -203,6 +210,7 @@ function consultaEndereco(idusuario) {
 };
 
 function cliqueAlteraEndereço() {
+    isCheckedAdress = false;
     divButtonConfirma.innerHTML = '<button id="button-confirm-address" onclick="cliqueConfirmaEndereço()" type="button" class="btn btn-light">Confirmar Endereço</button>';
     adressOne.innerHTML = '<div><label class="form-label mt-2">Rua:</label><input id="input-rua-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Bairro:</label><input id="input-bairro-confirm" type="text" class="form-control"></div>'
     adressTwo.innerHTML = '<div><label class="form-label mt-2">Cidade:</label><input id="input-cidade-confirm" type="text" class="form-control"></div><div><label class="form-label mt-2">Estado:</label><select id="input-estado-confirm" class="form-control"><option>Escolha a opção</option><option>Acre</option><option>Alagoas</option><option>Amapá</option><option>Amazonas</option><option>Bahia</option><option>Ceará</option><option>Espírito Santo</option><option>Goiás</option><option>Maranhão</option><option>Mato Grosso</option><option>Mato Grosso do Sul</option><option>Pará</option><option>Paraíba</option><option>Paraná</option><option>Pernambuco</option><option>Piauí</option><option>Rio de Janeiro</option><option>Rio Grande do Norte</option><option>Rio Grande do Sul</option><option>Rondônia</option><option>Roraima</option><option>Santa Catarina</option><option>São Paulo</option><option>Sergipe</option><option>Tocantins</option></select ></div ></div > '
@@ -240,16 +248,18 @@ function cliqueConfirmaEndereço() {
         confirmAddress.style.display = 'block';
         linhaAddress.style.marginTop = '10px';
         divButtonConfirma.innerHTML = '';
+        isCheckedAdress = true;
 
         divButtonAltera.innerHTML = '<button id="button-change-address" style="margin-left: 0px !important" onclick="cliqueAlteraEndereço()" type="button" class="btn btn-light">Alterar Endereço de Entrega</button>';
 
     }
-
 }
 
 // CheckBoxes Para Selecionar o tipo de Entrega:
 
+
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+let selectedCheckbox = null;
 
 function uncheckOtherBoxes(currentCheckbox) {
     checkboxes.forEach((checkbox) => {
@@ -257,7 +267,11 @@ function uncheckOtherBoxes(currentCheckbox) {
             checkbox.checked = false;
         }
     });
+    selectedCheckbox = currentCheckbox;
+    isChecked = true;
+    verificaEntrega();
 }
+
 checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', function () {
         uncheckOtherBoxes(this);
@@ -506,3 +520,234 @@ nomeCarteiraDigital.addEventListener('input', () => {
     nome = nome.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
     nomeCarteiraDigital.value = nome;
 });
+
+// Confirmar método de pagamento:
+
+const formularioCredito = document.querySelector('#form-credit');
+const formularioDebito = document.querySelector('#form-debit');
+const formularioPix = document.querySelector('#form-pix');
+const formularioBoleto = document.querySelector('#form-boleto');
+const formularioCarteiraDigital = document.querySelector('#form-carteiradigital');
+
+var opcaoCartaoCredito = document.querySelector('#payment-option-1');
+var opcaoCartaoDebito = document.querySelector('#payment-option-2');
+var opcaoPix = document.querySelector('#payment-option-3');
+var opcaoBoleto = document.querySelector('#payment-option-4');
+var opcaoCarteiraDigital = document.querySelector('#payment-option-5');
+
+formularioCredito.addEventListener('submit', function (evento) {
+    if (opcaoCartaoDebito.classList.contains("selected") || opcaoPix.classList.contains("selected") || opcaoBoleto.classList.contains("selected") || opcaoCarteiraDigital.classList.contains("selected")) {
+        opcaoCartaoDebito.classList.remove("selected");
+        opcaoPix.classList.remove("selected");
+        opcaoBoleto.classList.remove("selected");
+        opcaoCarteiraDigital.classList.remove("selected");
+    }
+    evento.preventDefault();
+    opcaoCartaoCredito.classList.add('selected');
+    metodoCartao.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+    isCheckedPayment = true;
+    montarTabela();
+});
+
+formularioDebito.addEventListener('submit', function (evento) {
+    if (opcaoCartaoCredito.classList.contains("selected") || opcaoPix.classList.contains("selected") || opcaoBoleto.classList.contains("selected") || opcaoCarteiraDigital.classList.contains("selected")) {
+        opcaoCartaoCredito.classList.remove("selected");
+        opcaoPix.classList.remove("selected");
+        opcaoBoleto.classList.remove("selected");
+        opcaoCarteiraDigital.classList.remove("selected");
+    }
+    evento.preventDefault();
+    opcaoCartaoDebito.classList.add('selected');
+    metodoCartaoDebito.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+    isCheckedPayment = true;
+    montarTabela();
+});
+
+formularioPix.addEventListener('submit', function (evento) {
+    if (opcaoCartaoCredito.classList.contains("selected") || opcaoCartaoDebito.classList.contains("selected") || opcaoBoleto.classList.contains("selected") || opcaoCarteiraDigital.classList.contains("selected")) {
+        opcaoCartaoCredito.classList.remove("selected");
+        opcaoCartaoDebito.classList.remove("selected");
+        opcaoBoleto.classList.remove("selected");
+        opcaoCarteiraDigital.classList.remove("selected");
+    }
+    evento.preventDefault();
+    opcaoPix.classList.add('selected');
+    metodoPix.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+    isCheckedPayment = true;
+    montarTabela();
+});
+
+formularioBoleto.addEventListener('submit', function (evento) {
+    if (opcaoCartaoCredito.classList.contains("selected") || opcaoCartaoDebito.classList.contains("selected") || opcaoPix.classList.contains("selected") || opcaoCarteiraDigital.classList.contains("selected")) {
+        opcaoCartaoCredito.classList.remove("selected");
+        opcaoCartaoDebito.classList.remove("selected");
+        opcaoPix.classList.remove("selected");
+        opcaoCarteiraDigital.classList.remove("selected");
+    }
+    evento.preventDefault();
+    opcaoBoleto.classList.add('selected');
+    metodoBoleto.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+    isCheckedPayment = true;
+    montarTabela();
+});
+
+formularioCarteiraDigital.addEventListener('submit', function (evento) {
+    if (opcaoCartaoCredito.classList.contains("selected") || opcaoCartaoDebito.classList.contains("selected") || opcaoPix.classList.contains("selected") || opcaoBoleto.classList.contains("selected")) {
+        opcaoCartaoCredito.classList.remove("selected");
+        opcaoCartaoDebito.classList.remove("selected");
+        opcaoPix.classList.remove("selected");
+        opcaoBoleto.classList.remove("selected");
+    }
+    evento.preventDefault();
+    opcaoCarteiraDigital.classList.add('selected');
+    metodoCarteiraDigital.style.display = 'none';
+    tituloPagamento.style.display = 'block';
+    linhaPagamento.style.display = 'block';
+    metodosPagamento.style.display = 'grid';
+    metodosDePagamento.style.display = 'flex';
+    isCheckedPayment = true;
+    montarTabela();
+});
+
+// Confirmação do pedido:
+
+var divTable = document.querySelector('.end-of-order-completion-body');
+var valorCheckBox = 0;
+
+function verificaEntrega() {
+    if (selectedCheckbox) {
+        if (selectedCheckbox.value == 'option1') {
+            valorCheckBox = 20;
+            var table = document.querySelector('.end-of-order-completion-body-table');
+            if (table.innerHTML == '') { } else {
+                var idValorEntrega = document.querySelector('#h5-valor-entrega');
+                montarTabela();
+                if (idValorEntrega.innerHTML == 'Valor da Entrega: --/--') {
+                    idValorEntrega.innerHTML = 'Valor da Entrega: R$' + valorCheckBox + ',00';
+                }
+            }
+        }
+        else {
+            valorCheckBox = 10;
+            var table = document.querySelector('.end-of-order-completion-body-table');
+            if (table.innerHTML == '') { } else {
+                var idValorEntrega = document.querySelector('#h5-valor-entrega');
+                montarTabela();
+                if (idValorEntrega.innerHTML == 'Valor da Entrega: --/--') {
+                    idValorEntrega.innerHTML = 'Valor da Entrega: R$' + valorCheckBox + ',00';
+                }
+            }
+        }
+    }
+};
+
+
+function montarTabela() {
+    var htmlTable = '';
+    var precototal = 0;
+    var precoTotalString = '';
+    var precoTotalItensFormatado = '';
+    const options = {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    };
+
+    if (opcaoCartaoDebito.classList.contains('selected')) {
+
+        var PTI = document.querySelector('#total-valor-itens').innerHTML;
+        PTI = PTI.replace('<strong>', '');
+        PTI = PTI.replace('</strong>', '');
+        console.log(PTI)
+        precototal = ((precoTotalItens * 0.9) + valorCheckBox).toFixed(2);
+        precoTotalString = precototal.toLocaleString('pt-BR', options);
+        precoTotalString = precoTotalString.replace('.', ',');
+
+
+        if (valorCheckBox == 0) {
+            htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5>Desconto do Plano de pagamento: 10%</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: --/--</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
+        } else {
+            htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5>Desconto do Plano de pagamento: 10%</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: R$ ' + valorCheckBox + ',00</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
+        }
+
+    } else if (opcaoPix.classList.contains('selected')) {
+
+        var PTI = document.querySelector('#total-valor-itens').innerHTML;
+        PTI = PTI.replace('<strong>', '');
+        PTI = PTI.replace('</strong>', '');
+        console.log(PTI)
+        precototal = ((precoTotalItens * 0.85) + valorCheckBox).toFixed(2);
+        precoTotalString = precototal.toLocaleString('pt-BR', options);
+        precoTotalString = precoTotalString.replace('.', ',');
+
+        if (valorCheckBox == 0) {
+            htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5>Desconto do Plano de pagamento: 10%</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: --/--</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
+        } else {
+            htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5>Desconto do Plano de pagamento: 15%</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: R$ ' + valorCheckBox + ',00</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
+        }
+
+    } else {
+
+        var PTI = document.querySelector('#total-valor-itens').innerHTML
+        PTI = PTI.replace('<strong>', '');
+        PTI = PTI.replace('</strong>', '');
+        console.log(PTI)
+        precototal = (precoTotalItens + valorCheckBox).toFixed(2);
+        precoTotalString = precototal.toLocaleString('pt-BR', options);
+        precoTotalString = precoTotalString.replace('.', ',');
+
+        if (valorCheckBox == 0) {
+            htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: --/--</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
+        } else {
+            htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: R$ ' + valorCheckBox + ',00</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
+        }
+    }
+
+    divTable.innerHTML = '<div class="end-of-order-completion-body-table"></div>';
+    console.log(divTable.innerHTML);
+
+    setTimeout(() => {
+        var table = document.querySelector('.end-of-order-completion-body-table');
+        console.log(table);
+        table.innerHTML = htmlTable;
+    }, 100);
+};
+
+function cancelaCompra() {
+    telaComprasItens.style.display = 'none';
+    promotions.style.display = 'block';
+    order.style.display = 'none';
+    popUpCarrinho.style.display = 'block';
+    cartPedido.style.display = 'block';
+    nomeCliente.style.marginTop = '0px';
+}
+
+function finalizaCompraFinal() {
+    var finalizaCompraFinalErro = document.querySelector('#erro_finalização_pedido');
+
+    if (isChecked == true && isCheckedAdress == true && isCheckedPayment == true) {
+        window.alert('Pedido Confirmado com sucesso!')
+    } else {
+        finalizaCompraFinalErro.style.display = 'block';
+
+        setTimeout(() => {
+            finalizaCompraFinalErro.style.display = 'none';
+        }, 5000)
+    }
+};
