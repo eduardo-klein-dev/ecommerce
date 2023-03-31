@@ -42,6 +42,5 @@ function alteraCookie(session) {
 
 function cliqueAlteraCookie() {
     alteraCookie(session);
-    console.log(telaCookie);
     telaCookie.style.display = 'none'
 }

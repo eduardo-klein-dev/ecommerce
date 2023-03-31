@@ -314,9 +314,6 @@ function verificaCarrinhoPopUp(idProdutoInserido) {
 };
 
 function removeItensPedido(idProdutoInserido, idProduto) {
-    console.log(idProdutoInserido);
-    console.log(idProduto);
-    console.log('http://localhost:8000/api/ecommerce/removeitempedido/' + idProdutoInserido + '/' + idProduto)
     fetch('http://localhost:8000/api/ecommerce/removeitempedido/' + idProdutoInserido + '/' + idProduto, {
         method: 'POST'
     })

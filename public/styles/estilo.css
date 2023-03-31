@@ -384,11 +384,13 @@ header {
 .header-logo {
     width: 150px;
     margin-top: 0px;
+    z-index: 99 !important;
 }
 
 .imagem-logo img {
     width: 100%;
     margin-top: 20px;
+    z-index: 99 !important;
 }
 
 .header-menu {
@@ -1200,7 +1202,7 @@ header {
     border: 2px solid #707070;
 }
 
-.table h5{
+.table h5 {
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 5px;
@@ -1222,7 +1224,7 @@ header {
     margin-bottom: 20px;
 }
 
-.buttons-status-pedido button{
+.buttons-status-pedido button {
     font-size: 20px;
     width: 175px;
     margin: 5px;
@@ -1238,4 +1240,67 @@ header {
     padding: 5px;
     border-radius: 10px;
     font-size: 18px;
+}
+
+.icon-close-final-order {
+    position: absolute;
+    right: 30px;
+    top: 120px;
+    font-size: 38px;
+    cursor: pointer;
+}
+
+/* Tela de confirmação do pedido: */
+
+.final-order-confirmation-screen {
+    width: 100vw;
+    height: calc(100vh - 100px);
+    background-image: url("../../public/imgs/background-gray.jpg");
+}
+
+.final-order-confirmation-screen-opacity {
+    background-color: rgba(225, 225, 225, 0.7);
+    width: inherit;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.final-order-confirmation-screen-body {
+    background-color: #141414;
+    padding: 20px;
+    border-radius: 25px;
+    width: 800px;
+    height: 350px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.final-order-confirmation-screen-body-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 400px;
+    padding: 20px;
+}
+
+.final-order-confirmation-screen-body-left img{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.final-order-confirmation-screen-body-right {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+}
+
+.final-order-confirmation-screen-body-right h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

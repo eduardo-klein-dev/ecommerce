@@ -37,6 +37,8 @@ function cliqueBotaoEnvia() {
     }
 };
 
+var qtdeItens = 0;
+
 function finalizaPedido(session) {
     $.ajax({
         url: 'http://localhost:8000/api/ecommerce/finalizapedido/' + session,
@@ -72,7 +74,9 @@ function finalizaPedido(session) {
                     var totalItem = total * qtde;
                     var totalItemFormatado = totalItem.toLocaleString('pt-BR', options);
 
-                    preco.innerHTML = '<strong>R$ ' + totalItemFormatado + '</strong>';
+                    total = total.toString();
+                    total = total.replace('.', ',');
+                    preco.innerHTML = '<strong>' + json[i]['qt_produto'] + 'x   R$ ' + total + '</strong>';
                     precoInicial.innerHTML = 'R$ ' + valor1;
                     desconto.innerHTML = '<strong>-' + json[i]['perc_desconto'] + '%</strong>';
                     var precoTotalItem = parseFloat(totalItem);
@@ -88,7 +92,10 @@ function finalizaPedido(session) {
                     preco.innerHTML = '<strong>R$ ' + totalFormatado + '</strong>';
                     precoInicial.innerHTML = '';
                     desconto.innerHTML = '';
-                    preco.innerHTML = '<strong>R$ ' + json[i]['valor_produto'] + '</strong>';
+                    var total = json[i]['valor_produto'];
+                    total = total.toString();
+                    total = total.replace('.', ',');
+                    preco.innerHTML = '<strong>' + json[i]['qt_produto'] + 'x   R$ ' + json[i]['valor_produto'] + '</strong>';
 
                     var numeroStr = json[i]['valor_produto'];
                     numeroStr = numeroStr.replace('.', '').replace(',', '.');
@@ -143,7 +150,7 @@ function finalizaPedido(session) {
 
             const precoFormatado = precoTotalItens.toLocaleString('pt-BR', options);
             document.querySelector('#total-valor-itens').innerHTML = '<strong>Valor Total dos Itens: R$ ' + precoFormatado + '</strong>';
-
+            qtdeItens = Object.keys(json).length;
         }
     });
 };
@@ -164,6 +171,7 @@ var divButtonConfirma = document.querySelector('#div-botao-confirma');
 const adressOne = document.querySelector('#rua-bairro-address');
 const adressTwo = document.querySelector('#cidade-estado-address');
 
+const idCookie = '';
 function pegaValorId() {
     function getIDCookie() {
         const cookies = document.cookie.split(';');
@@ -180,7 +188,7 @@ function pegaValorId() {
     if (idCookie) {
         consultaEndereco(idCookie)
     } else {
-        console.log("Cookie 'ID' não encontrado.");
+        // console.log("Cookie 'ID' não encontrado.");
     }
 }
 
@@ -657,11 +665,10 @@ function verificaEntrega() {
     }
 };
 
-
+var precoTotalString = '';
 function montarTabela() {
     var htmlTable = '';
     var precototal = 0;
-    var precoTotalString = '';
     var precoTotalItensFormatado = '';
     const options = {
         style: 'decimal',
@@ -674,11 +681,9 @@ function montarTabela() {
         var PTI = document.querySelector('#total-valor-itens').innerHTML;
         PTI = PTI.replace('<strong>', '');
         PTI = PTI.replace('</strong>', '');
-        console.log(PTI)
         precototal = ((precoTotalItens * 0.9) + valorCheckBox).toFixed(2);
         precoTotalString = precototal.toLocaleString('pt-BR', options);
         precoTotalString = precoTotalString.replace('.', ',');
-
 
         if (valorCheckBox == 0) {
             htmlTable += '<table class="table"><tbody><tr><td><h5>' + PTI + '</h5></td></tr><tr><td><h5>Desconto do Plano de pagamento: 10%</h5></td></tr><tr><td><h5 id="h5-valor-entrega">Valor da Entrega: --/--</h5></td></tr><tr><td id="finaliza-compra-valor-total-pedido"><h5>Valor Total do Pedido: R$ ' + precoTotalString + '</h5></td></tr></tbody></table><div id="erro_finalização_pedido">Alguma informação não foi preenchida!<br>Favor Revisar as informações inseridas!</div><div class="buttons-status-pedido"><button onclick="cancelaCompra()" type="button" class="btn btn-danger">Cancelar</button><button type="button" onclick="finalizaCompraFinal()" class="btn btn-success">Confirmar Pedido</button></div>';
@@ -691,7 +696,6 @@ function montarTabela() {
         var PTI = document.querySelector('#total-valor-itens').innerHTML;
         PTI = PTI.replace('<strong>', '');
         PTI = PTI.replace('</strong>', '');
-        console.log(PTI)
         precototal = ((precoTotalItens * 0.85) + valorCheckBox).toFixed(2);
         precoTotalString = precototal.toLocaleString('pt-BR', options);
         precoTotalString = precoTotalString.replace('.', ',');
@@ -707,7 +711,6 @@ function montarTabela() {
         var PTI = document.querySelector('#total-valor-itens').innerHTML
         PTI = PTI.replace('<strong>', '');
         PTI = PTI.replace('</strong>', '');
-        console.log(PTI)
         precototal = (precoTotalItens + valorCheckBox).toFixed(2);
         precoTotalString = precototal.toLocaleString('pt-BR', options);
         precoTotalString = precoTotalString.replace('.', ',');
@@ -720,11 +723,9 @@ function montarTabela() {
     }
 
     divTable.innerHTML = '<div class="end-of-order-completion-body-table"></div>';
-    console.log(divTable.innerHTML);
 
     setTimeout(() => {
         var table = document.querySelector('.end-of-order-completion-body-table');
-        console.log(table);
         table.innerHTML = htmlTable;
     }, 100);
 };
@@ -738,11 +739,30 @@ function cancelaCompra() {
     nomeCliente.style.marginTop = '0px';
 }
 
+var telaNumPed = document.querySelector('.final-order-confirmation-screen');
+var numPed = document.querySelector('#numped');
+
 function finalizaCompraFinal() {
     var finalizaCompraFinalErro = document.querySelector('#erro_finalização_pedido');
 
     if (isChecked == true && isCheckedAdress == true && isCheckedPayment == true) {
-        window.alert('Pedido Confirmado com sucesso!')
+        order.style.display = 'none';
+        promotions.style.display = 'none';
+        telaNumPed.style.display = 'flex';
+        numPed.innerHTML = 'CÓDIGO DO SEU PEDIDO: <label>' + session + '</label>';
+        popUpCarrinho.style.display = 'block';
+        cartPedido.style.display = 'block';
+        nomeCliente.style.marginTop = '0px';
+        document.cookie = 'PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        confirmaPedidoDados();
+
+        setTimeout(() => {
+            console.log('chegou aqui!')
+            telaNumPed.style.display = 'none';
+            promotions.style.display = 'flex';
+            location.reload();
+        }, 5000);
+
     } else {
         finalizaCompraFinalErro.style.display = 'block';
 
@@ -750,4 +770,87 @@ function finalizaCompraFinal() {
             finalizaCompraFinalErro.style.display = 'none';
         }, 5000)
     }
+};
+
+document.querySelector('.icon-close-final-order').addEventListener('click', () => {
+    telaComprasItens.style.display = 'none';
+    promotions.style.display = 'block';
+    order.style.display = 'none';
+    popUpCarrinho.style.display = 'block';
+    cartPedido.style.display = 'block';
+    nomeCliente.style.marginTop = '0px';
+})
+
+// Declaração de variáveis usadas em confirmaPedidoDados():
+
+var idCliente = 0;
+var ConfirmaRua = '';
+var ConfirmaBairro = '';
+var ConfirmaCidade = '';
+var ConfirmaEstado = '';
+var IdEntrega = 0;
+var formapagamento = '';
+
+function confirmaPedidoDados() {
+    // Pega seção para inserção no cabeçalho do pedido:
+    // console.log(session);
+
+    // ID do cliente para inserção no cabeçalho do pedido:
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.indexOf("ID=") == 0) {
+            idCliente = cookie.substring("ID=".length, cookie.length);
+            break;
+        }
+    }
+    // console.log(idCliente);
+
+    // Pega informações do endereço para inserção no cabeçalho do pedido:
+    ConfirmaRua = document.querySelector('#input-rua-confirm').value;
+    ConfirmaBairro = document.querySelector('#input-bairro-confirm').value;
+    ConfirmaCidade = document.querySelector('#input-cidade-confirm').value;
+    ConfirmaEstado = document.querySelector('#input-estado-confirm').value;
+
+    // Pega informações do tipo de entrega para inserção no cabeçalho do pedido:
+
+    if (valorCheckBox == 20) {
+        IdEntrega = 2;
+    } else {
+        IdEntrega = 1;
+    }
+    //console.log(IdEntrega);
+
+    // Pega informações do método de pagamento para inserção no cabeçalho do pedido:
+
+    if (opcaoCartaoCredito.classList.contains('selected')) {
+        formapagamento = 'Cartão de Crédito';
+    } if (opcaoCartaoDebito.classList.contains('selected')) {
+        formapagamento = 'Cartão de Debito';
+    } if (opcaoPix.classList.contains('selected')) {
+        formapagamento = 'Pix';
+    } if (opcaoBoleto.classList.contains('selected')) {
+        formapagamento = 'Boleto';
+    } if (opcaoCarteiraDigital.classList.contains('selected')) {
+        formapagamento = 'Carteira Digital';
+    }
+    //console.log(formapagamento);
+
+    // Pega informações da quantida de itens para inserção no cabeçalho do pedido:
+    //console.log(qtdeItens);
+
+    // Pega informações do valor total do pedido para inserção no cabeçalho do pedido:
+    //console.log(precoTotalString);
+
+    confirmaPedido(session, idCliente, ConfirmaRua, ConfirmaBairro, ConfirmaCidade, ConfirmaEstado, IdEntrega, formapagamento, qtdeItens, precoTotalString);
+}
+
+function confirmaPedido() {
+
+    $.ajax({
+        url: 'http://localhost:8000/api/ecommerce/confirmapedido/' + session + '/' + idCliente + '/' + ConfirmaRua + '/' + ConfirmaBairro + '/' + ConfirmaCidade + '/' + ConfirmaEstado + '/' + IdEntrega + '/' + formapagamento + '/' + qtdeItens + '/' + precoTotalString,
+        type: 'GET',
+        beforeSend: function () { },
+        success: function () { },
+    });
 };

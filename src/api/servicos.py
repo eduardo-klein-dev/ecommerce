@@ -269,3 +269,16 @@ def consultaEndereco(idusuario):
     con.close()
 
     return converter
+
+
+def confirmaPedido(session, idcliente, rua, bairro, cidade, estado, tipoentrega, formapagamento, qtdeitens, valortotal):
+    val = (str(session), idcliente, str(rua), str(bairro), str(cidade), str(estado),
+           tipoentrega, str(formapagamento), qtdeitens, str(valortotal))
+    con = mysql.connector.connect(
+        host="localhost", user="root", password="", database="ecommerce")
+    c = con.cursor()
+    sql = "insert into cabecalho_pedido(id_pedido,id_cliente,rua_entrega,bairro_entrega,cidade_entrega,estado_entrega,tipo_entrega,forma_pagamento, qtde_itens, valor_total) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    c.execute(sql, val)
+    con.commit()
+    con.close()
+    return 'DEU CERTO!'

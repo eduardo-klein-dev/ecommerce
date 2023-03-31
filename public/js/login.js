@@ -50,7 +50,6 @@ function cliqueValidaLogin() {
         validaLoginDois(email, senha);
 
         setTimeout(() => {
-            console.log(logado)
 
             if (logado == true) {
                 telaLogin.style.display = 'none';
@@ -103,7 +102,6 @@ function validaLoginDois(email, senha) {
 
 function enviaCadastro(nome, email, senha, rua, bairro, cidade, estado) {
 
-    console.log('http://localhost:8000/api/ecommerce/cadastro/' + nome + '/' + email + '/' + senha + '/' + rua + '/' + bairro + '/' + cidade + '/' + estado)
     fetch('http://localhost:8000/api/ecommerce/cadastro/' + nome + '/' + email + '/' + senha + '/' + rua + '/' + bairro + '/' + cidade + '/' + estado, {
         method: 'POST'
     })
@@ -113,7 +111,6 @@ function enviaCadastro(nome, email, senha, rua, bairro, cidade, estado) {
 }
 
 function validaLogin(email, senha) {
-    console.log('chegou aqui')
 
     fetch('http://d06a0002n.dfs.local:8000/api/ecommerce/login/' + email + '/' + senha)
         .then(response => {
@@ -169,8 +166,6 @@ function cliqueEnviaCadastro() {
         enviaCadastro(nome, email, senha, rua, bairro, cidade, estado);
 
         setTimeout(() => {
-            console.log('AQUI É O EMAIL:' + email);
-            console.log(senha);
             validaLogin(email, senha);
             telaCadastro.style.display = 'none';
             location.reload();

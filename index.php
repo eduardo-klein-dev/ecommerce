@@ -296,6 +296,7 @@
          <div class="final-order" style="display: none;">
              <div class="final-order-opacity">
                  <div class="final-order-body container">
+                     <i class="fa-solid fa-xmark icon-close-final-order"></i>
                      <div class="final-order-body-left">
                          <div class="tittle-final-order-left">
                              <h2>Itens do Pedido:</h2>
@@ -659,6 +660,21 @@
                                  </div>
                              </form>
                          </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="final-order-confirmation-screen" style="display: none;">
+             <div class="final-order-confirmation-screen-opacity">
+                 <div class="final-order-confirmation-screen-body">
+                     <div class="final-order-confirmation-screen-body-left">
+                         <img src="public/imgs/delivery.png" alt="">
+                     </div>
+                     <div class="final-order-confirmation-screen-body-right">
+                         <h3><u>PEDIDO CONFIRMADO!</u></h3>
+                         <h5>Obrigado pela preferência! Estaremos sempre a disposição com os melhores preços para lhe atender.</h5>
+                         <h5>Enviaremos para você um e-mail confirmando as informações do pedido.</h5>
+                         <h3 id="numped">CÓDIGO DO SEU PEDIDO: </h3>
                      </div>
                  </div>
              </div>
